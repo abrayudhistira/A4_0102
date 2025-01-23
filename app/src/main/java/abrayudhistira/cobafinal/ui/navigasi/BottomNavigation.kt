@@ -27,11 +27,7 @@ fun BottomNavigationBar(navController: NavController) {
         containerColor = Color.Black // Menetapkan warna latar belakang menjadi hitam
     ) {
         val items = listOf(
-            DestinasiHomeBuku,
-            DestinasiHomeKategori,
             DestinasiMainScreen, // Main will be in the center
-            DestinasiHomePenulis,
-            DestinasiHomePenerbit
         )
 
         val currentBackStack by navController.currentBackStackEntryAsState()
@@ -45,7 +41,7 @@ fun BottomNavigationBar(navController: NavController) {
                 NavigationBarItem(
                     icon = {
                         Icon(
-                            painter = painterResource(id = R.drawable.homeputih), // Update with your center icon
+                            painter = painterResource(id = R.drawable.home), // Update with your center icon
                             contentDescription = "Main"
                         )
                     },
@@ -68,10 +64,10 @@ fun BottomNavigationBar(navController: NavController) {
                 NavigationBarItem(
                     icon = {
                         when (destination) {
-                            DestinasiHomeBuku -> Icon(painter = painterResource(id = R.drawable.bukuputih), contentDescription = "Buku")
-                            DestinasiHomeKategori -> Icon(painter = painterResource(id = R.drawable.kategoriputih), contentDescription = "Kategori")
-                            DestinasiHomePenulis -> Icon(painter = painterResource(id = R.drawable.penulisputih), contentDescription = "Penulis")
-                            DestinasiHomePenerbit -> Icon(painter = painterResource(id = R.drawable.penerbitputih), contentDescription = "Penerbit")
+//                            DestinasiHomeBuku -> Icon(painter = painterResource(id = R.drawable.bukuputih), contentDescription = "Buku")
+//                            DestinasiHomeKategori -> Icon(painter = painterResource(id = R.drawable.kategoriputih), contentDescription = "Kategori")
+//                            DestinasiHomePenulis -> Icon(painter = painterResource(id = R.drawable.penulisputih), contentDescription = "Penulis")
+//                            DestinasiHomePenerbit -> Icon(painter = painterResource(id = R.drawable.penerbitputih), contentDescription = "Penerbit")
                         }
                     },
                     selected = currentDestination?.route == destination.route,
