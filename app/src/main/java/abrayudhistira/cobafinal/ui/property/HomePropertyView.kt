@@ -2,6 +2,7 @@ package abrayudhistira.cobafinal.ui.property
 
 import abrayudhistira.cobafinal.R
 import abrayudhistira.cobafinal.model.Properti
+import abrayudhistira.cobafinal.ui.PenyediaViewModel
 import abrayudhistira.cobafinal.ui.navigasi.CostumeTopAppBar
 import abrayudhistira.cobafinal.ui.navigasi.DestinasiNavigasi
 import android.content.Context
@@ -91,7 +92,7 @@ fun HomeScreen(
             onDetailClick = onDetailClick,
             onDeleteClick = {
                 //viewModel.deleteMhs(it.nim)
-               // viewModel.getMhs()
+               viewModel.getProperti()
             },
         )
     }

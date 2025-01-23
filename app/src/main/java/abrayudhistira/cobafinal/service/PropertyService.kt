@@ -8,6 +8,7 @@ import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface PropertyService {
@@ -16,18 +17,18 @@ interface PropertyService {
         "Content-Type: application/json",
     )
     // API FOR ENTITY PROPERTI
-    @GET("listproperti.php")
+    @GET("properti/listproperti")
     suspend fun getProperti(): List<Properti>//GET LIST PROPERTI
 
-    @GET("getbyidProperti.php/{id_properti}")
-    suspend fun getbyidProperti(@Query("id_properti")idProperti: Properti): Properti //GET BY ID
+    @GET("properti/{id_properti}")
+    suspend fun getbyidProperti(@Path("id_properti")id_properti: String): Properti //GET BY ID
 
-    @POST("insertProperti.php")
+    @POST("properti/add")
     suspend fun insertProperti(@Body properti: Properti) // INSERT PROPERTI
 
-    @PUT("editProperti.php")
-    suspend fun editProperti(@Query("id_properti")idProperti: Properti, @Body properti: Properti) // EDIT PROPERTI
+    @PUT("properti/edit/{id_properti}")
+    suspend fun editProperti(@Path("id_properti")id_properti: String, @Body properti: Properti) // EDIT PROPERTI
 
-    @DELETE("deleteProperti.php/{id_properti}")
-    suspend fun deleteProperti(@Query("id_properti")idProperti: Properti): Response<Void> //DELETE PROPERTI
+    @DELETE("properti/delete/{id_properti}")
+    suspend fun deleteProperti(@Path("id_properti")id_properti: String): Response<Void> //DELETE PROPERTI
 }
