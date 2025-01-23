@@ -1,13 +1,13 @@
 package abrayudhistira.cobafinal.application
 
-import abrayudhistira.cobafinal.dependeciesinjection.PropertyContainer
+import abrayudhistira.cobafinal.dependeciesinjection.ManajemenPropertyContainer
 import android.app.Application
 
 class ManajemenPropertyApplication : Application() {
-    lateinit var container: PropertyContainer
+    lateinit var container: ManajemenPropertyContainer
 
     override fun onCreate() {
         super.onCreate()
-        container = PropertyContainer()
+        container = ManajemenPropertyContainer()
     }
 }

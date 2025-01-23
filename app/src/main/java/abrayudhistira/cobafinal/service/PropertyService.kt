@@ -17,7 +17,7 @@ interface PropertyService {
         "Content-Type: application/json",
     )
     // API FOR ENTITY PROPERTI
-    @GET("properti/listproperti")
+    @GET("properti/")
     suspend fun getProperti(): List<Properti>//GET LIST PROPERTI
 
     @GET("properti/{id_properti}")

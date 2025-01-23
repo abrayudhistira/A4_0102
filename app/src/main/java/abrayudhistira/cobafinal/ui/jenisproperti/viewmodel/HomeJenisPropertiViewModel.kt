@@ -20,7 +20,7 @@ sealed class HomeJenisPropertiUiState {
     object Loading : HomeJenisPropertiUiState()
 }
 
-class HomePropertyViewModel(private val jenisPropertyRepository: JenisPropertyRepository ) : ViewModel() {
+class HomeJenisPropertiViewModel(private val jenisPropertyRepository: JenisPropertyRepository ) : ViewModel() {
 
     var homeJenisPropertiUiState : HomeJenisPropertiUiState by mutableStateOf(HomeJenisPropertiUiState.Loading)
         private set

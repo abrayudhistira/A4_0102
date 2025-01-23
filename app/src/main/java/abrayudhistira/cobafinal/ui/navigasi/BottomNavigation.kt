@@ -27,6 +27,7 @@ fun BottomNavigationBar(navController: NavController) {
         containerColor = Color.Black // Menetapkan warna latar belakang menjadi hitam
     ) {
         val items = listOf(
+            DestinasiHomeJenisProperty,
             DestinasiMainScreen, // Main will be in the center
         )
 
@@ -36,7 +37,7 @@ fun BottomNavigationBar(navController: NavController) {
         // Add items to the left, center, and right
         items.forEachIndexed { index, destination ->
             // If it's the center item (DestinasiMainScreen), apply different layout
-            if (index == 2) { // Center item at index 2
+            if (index == 1) { // Center item at index 2
                 // Center item (Main)
                 NavigationBarItem(
                     icon = {
@@ -64,6 +65,8 @@ fun BottomNavigationBar(navController: NavController) {
                 NavigationBarItem(
                     icon = {
                         when (destination) {
+                            DestinasiHomeProperty -> Icon(painter = painterResource(id = R.drawable.property), contentDescription = "Properti")
+                            DestinasiHomeJenisProperty -> Icon(painter = painterResource(id = R.drawable.jenisproperty), contentDescription = "Jenis Properti")
 //                            DestinasiHomeBuku -> Icon(painter = painterResource(id = R.drawable.bukuputih), contentDescription = "Buku")
 //                            DestinasiHomeKategori -> Icon(painter = painterResource(id = R.drawable.kategoriputih), contentDescription = "Kategori")
 //                            DestinasiHomePenulis -> Icon(painter = painterResource(id = R.drawable.penulisputih), contentDescription = "Penulis")

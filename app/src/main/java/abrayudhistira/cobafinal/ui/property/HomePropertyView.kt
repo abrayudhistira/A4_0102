@@ -136,7 +136,7 @@ fun PropertyStatus(
                     properti = homeUiState.properti,
                     modifier = modifier.fillMaxWidth(),
                     onDetailClick = {
-                        onDetailClick(it.id_properti.toString())
+                        onDetailClick(it.idProperti.toString())
                     },
                     onDeleteClick={
                         onDeleteClick(it)
@@ -254,7 +254,7 @@ fun PropertyCard(
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 Text(
-                    text = "Harga: ${properti.harga}",
+                    text = "Harga: ${properti.Harga}",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurface
                 )

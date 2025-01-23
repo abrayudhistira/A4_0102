@@ -1,7 +1,10 @@
 package abrayudhistira.cobafinal.dependeciesinjection
 
+import abrayudhistira.cobafinal.repository.JenisPropertyRepository
+import abrayudhistira.cobafinal.repository.NetworkJenisPropertyRepository
 import abrayudhistira.cobafinal.repository.NetworkPropertiRepository
 import abrayudhistira.cobafinal.repository.PropertiRepository
+import abrayudhistira.cobafinal.service.JenisPropertyService
 import abrayudhistira.cobafinal.service.PropertyService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
@@ -11,15 +14,17 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 
 interface AppContainer {
-    val DetailPropRepository : PropertiRepository
+    val propertyRepository : PropertiRepository
+    val jenisPropertyRepository : JenisPropertyRepository
 }
 
-class PropertyContainer : AppContainer {
-    private val baseUrl = "http://localhost:3000/api/"
+class ManajemenPropertyContainer: AppContainer {
+    private val baseUrl = "http://192.168.100.53:3000/api/"
+    private val json = Json { ignoreUnknownKeys = true }
 
-    // Buat logging interceptor
+    // Buat HttpLoggingInterceptor
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BODY
+        level = HttpLoggingInterceptor.Level.BODY // Level.BODY akan menampilkan body request dan response
     }
 
     // Buat OkHttpClient dengan logging interceptor
@@ -27,11 +32,10 @@ class PropertyContainer : AppContainer {
         .addInterceptor(loggingInterceptor)
         .build()
 
-    // Buat instance Retrofit
-    private val json = Json { ignoreUnknownKeys = true }
+    // Buat Retrofit dengan OkHttpClient yang sudah ditambahkan logging interceptor
     private val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
-        .client(okHttpClient) // Tambahkan OkHttpClient dengan logging interceptor
+        .client(okHttpClient) // Tambahkan OkHttpClient ke Retrofit
         .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
         .build()
 
@@ -41,7 +45,15 @@ class PropertyContainer : AppContainer {
     }
 
     // Implementasi repository
-    override val DetailPropRepository: PropertiRepository by lazy {
+    override val propertyRepository: PropertiRepository by lazy {
         NetworkPropertiRepository(propertyService)
+    }
+
+    private val jenisPropertyService: JenisPropertyService by lazy {
+        retrofit.create(JenisPropertyService::class.java)
+    }
+
+    override val jenisPropertyRepository : JenisPropertyRepository by lazy {
+        NetworkJenisPropertyRepository(jenisPropertyService)
     }
 }

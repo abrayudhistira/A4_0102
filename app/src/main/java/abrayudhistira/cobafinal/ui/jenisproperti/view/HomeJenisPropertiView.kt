@@ -8,6 +8,7 @@ import abrayudhistira.cobafinal.model.JenisProperti
 import abrayudhistira.cobafinal.model.Properti
 import abrayudhistira.cobafinal.ui.PenyediaViewModel
 import abrayudhistira.cobafinal.ui.jenisproperti.viewmodel.HomeJenisPropertiUiState
+import abrayudhistira.cobafinal.ui.jenisproperti.viewmodel.HomeJenisPropertiViewModel
 import abrayudhistira.cobafinal.ui.navigasi.CostumeTopAppBar
 import abrayudhistira.cobafinal.ui.navigasi.DestinasiNavigasi
 import android.content.Context
@@ -89,7 +90,7 @@ fun HomeJenisPropertiView(
                     IconButton(onClick ={navController.popBackStack() }) {
                         Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
                     }
-                    IconButton(onClick ={viewModel.getProperti() }) {
+                    IconButton(onClick ={viewModel.getJenisProperti() }) {
                         Icon(imageVector = Icons.Default.Refresh, contentDescription = "Refresh")
                     }
                 },
@@ -107,13 +108,13 @@ fun HomeJenisPropertiView(
         },
     ) {innerPadding ->
         JenisPropertyStatus(
-            homeUiState = viewModel.homeUiState,
-            retryAction = {viewModel.getProperti() },
+            homeJenisPropertiUiState = viewModel.homeJenisPropertiUiState,
+            retryAction = {viewModel.getJenisProperti() },
             modifier = Modifier.padding(innerPadding),
             onDetailClick = onDetailClick,
             onDeleteClick = {
                 //viewModel.delete
-                viewModel.getProperti()
+                viewModel.getJenisProperti()
             }
         )
     }
@@ -141,7 +142,7 @@ fun JenisPropertyStatus(
                     jenisProperti = homeJenisPropertiUiState.jenisProperti,
                     modifier = modifier.fillMaxWidth(),
                     onDetailClick = {
-                        onDetailClick(it.id_jenis.toString())
+                        onDetailClick(it.idJenis.toString())
                     },
                     onDeleteClick={
                         onDeleteClick(it)
@@ -184,8 +185,8 @@ fun OnError(retryAction: () -> Unit, modifier: Modifier = Modifier) {
 fun PropertyLayout(
     jenisProperti: List<JenisProperti>,
     modifier: Modifier = Modifier,
-    onDetailClick: (Properti) -> Unit,
-    onDeleteClick: (Properti) -> Unit = {}
+    onDetailClick: (JenisProperti) -> Unit,
+    onDeleteClick: (JenisProperti) -> Unit = {}
 ) {
     LazyColumn(
         modifier = modifier,
@@ -208,8 +209,8 @@ fun PropertyLayout(
 fun JenisPropertyCard(
     jenisProperti: JenisProperti,
     modifier: Modifier = Modifier,
-    onDeleteClick: (Properti) -> Unit = {},
-    onEditClick: (Properti) -> Unit = {}
+    onDeleteClick: (JenisProperti) -> Unit = {},
+    onEditClick: (JenisProperti) -> Unit = {}
 ) {
     Card(
         modifier = modifier,

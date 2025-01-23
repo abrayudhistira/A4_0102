@@ -5,15 +5,21 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Properti(
-    val id_properti: String,
+    @SerialName("id_properti")
+    val idProperti: Int,
     val nama_properti: String,
     val deskripsi_properti: String,
     val lokasi: String,
-    val harga: String,
-    val status_properti: String,
-    val id_jenis: String,  // Relasi ke JenisProperti
-    val id_pemilik: String,              // Relasi ke Pemilik
-    val id_manajer: String       // Relasi ke ManajerProperti
+    @SerialName("harga")
+    val Harga: String,
+    @SerialName("status_properti")
+    val statusProperti: String,
+    @SerialName("id_jenis")
+    val idJenis: Int,  // Relasi ke JenisProperti
+    @SerialName("id_pemilik")
+    val idPemilik: Int,              // Relasi ke Pemilik
+    @SerialName("id_manajer")
+    val idManajer: Int       // Relasi ke ManajerProperti
 )
 
 //@Serializable
