@@ -10,7 +10,7 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
 
-interface ManajerProperty {
+interface ManajerPropertiService {
     @Headers(
         "Accept: application/json",
         "Content-Type: application/json",
