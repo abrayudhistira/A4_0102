@@ -6,5 +6,7 @@ import androidx.compose.ui.Modifier
 @Composable
 fun HomeApp(
     modifier: Modifier = Modifier,
-    on
-)
+    onHalamanProperti: () -> Unit
+) {
+
+}

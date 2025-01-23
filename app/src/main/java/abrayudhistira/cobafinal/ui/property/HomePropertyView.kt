@@ -25,8 +25,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -38,68 +40,82 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 
-object DestinasiHome: DestinasiNavigasi {
-    override val route = "home"
-    override val titleRes = "Home Property"
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(
+fun HomePropertyView(
     navigateToItemEntry:()->Unit,
     modifier: Modifier = Modifier,
     onDetailClick: (String) -> Unit ={},
+    navController: NavController,
+    onBackClick: () -> Unit = {},
     viewModel: HomePropertyViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ){
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
-    Scaffold(
+    Scaffold (
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            CostumeTopAppBar(
-                title = DestinasiHome.titleRes,
-                canNavigateBack = false,
-                scrollBehavior = scrollBehavior,
-                onRefresh = {
-                    viewModel.getProperti()
-                }
+            TopAppBar(
+                title = {
+                    Box(modifier = modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                        Text(
+                            text = "Daftar Property",
+                            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                            color = Color.Black
+                        )
+                    }
+                },
+                navigationIcon = {
+                    IconButton(onClick ={navController.popBackStack() }) {
+                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
+                    }
+                    IconButton(onClick ={viewModel.getProperti() }) {
+                        Icon(imageVector = Icons.Default.Refresh, contentDescription = "Refresh")
+                    }
+                },
+                scrollBehavior = scrollBehavior
             )
         },
         floatingActionButton = {
             FloatingActionButton(
                 onClick = navigateToItemEntry,
                 shape = MaterialTheme.shapes.medium,
-                modifier = Modifier.padding(18.dp)
+                modifier = Modifier.padding(16.dp)
             ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add Property")
             }
         },
-    ) { innerPadding->
-        HomeStatus(
-            homeUiState = viewModel.prpViewModel,
-            retryAction = {viewModel.getProperti()},
+    ) {innerPadding ->
+        PropertyStatus(
+            homeUiState = viewModel.homeUiState,
+            retryAction = {viewModel.getProperti() },
             modifier = Modifier.padding(innerPadding),
             onDetailClick = onDetailClick,
             onDeleteClick = {
-                //viewModel.deleteMhs(it.nim)
-               viewModel.getProperti()
-            },
+                //viewModel.delete
+                viewModel.getProperti()
+            }
         )
     }
 }
 
 @Composable
-fun HomeStatus(
+fun PropertyStatus(
     homeUiState: HomeUiState,
     retryAction: () -> Unit,
     modifier: Modifier = Modifier,

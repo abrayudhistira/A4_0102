@@ -1,7 +1,8 @@
 package abrayudhistira.cobafinal.ui.navigasi
 
 import abrayudhistira.cobafinal.ui.HomeApp
-import abrayudhistira.cobafinal.ui.property.HomeScreen
+import abrayudhistira.cobafinal.ui.property.HomePropertyView
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -23,16 +24,22 @@ fun PengelolaHalaman(
         NavHost(
             navController = navController,
             startDestination = DestinasiMainScreen.route,
-            modifier = Modifier,
+            modifier = Modifier.padding(it),
         ) {
             composable(route = DestinasiMainScreen.route) {
                 HomeApp(
                     onHalamanProperti = {
-                        navController.navigate(DestinasiHome.route) },
+                        navController.navigate(DestinasiHomeProperty.route)
+                    },
                     modifier = modifier
                 )
             }
-            composable(route = )
+            composable(route = DestinasiHomeProperty.route) {
+                HomePropertyView(
+                    navController = navController,
+                    navigateToItemEntry = {navController.navigate(DestinasiEntry.route)}
+                )
+            }
         }
     }
 }
