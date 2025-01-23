@@ -24,3 +24,8 @@ object DestinasiHomeJenisProperty : DestinasiNavigasi {
     override val route = "home_jenis_property"
     override val titleRes = "Home Jenis Property"
 }
+
+object DestinasiHomePemilik : DestinasiNavigasi {
+    override val route = "home_pemilik"
+    override val titleRes = "Home Pemilik"
+}

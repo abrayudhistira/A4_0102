@@ -32,7 +32,8 @@ import androidx.compose.ui.unit.sp
 fun HomeApp(
     modifier: Modifier = Modifier,
     onHalamanProperti: () -> Unit,
-    onHalamanJenisProperti: () -> Unit
+    onHalamanJenisProperti: () -> Unit,
+    onHalamanPemilik: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -66,9 +67,26 @@ fun HomeApp(
                 Spacer(Modifier.height(16.dp))
                 ManageBox(
                     title = "Jenis Properti",
-                    description = "Kelola Jenis Buku",
+                    description = "Kelola Jenis Properti",
                     backgroundColor = Color.Black,
                     iconResource = R.drawable.jenisproperty,
+                    onClick = { onHalamanJenisProperti() }
+                )
+            }
+            Column(modifier = Modifier.weight(1f)) {
+                ManageBox(
+                    title = "Pemilik",
+                    description = "Kelola Pemilik",
+                    backgroundColor = Color.Black, // Darker box background
+                    iconResource = R.drawable.owner,
+                    onClick = { onHalamanPemilik() }
+                )
+                Spacer(Modifier.height(16.dp))
+                ManageBox(
+                    title = "Manajer Properti",
+                    description = "Kelola Manajer Properti",
+                    backgroundColor = Color.Black,
+                    iconResource = R.drawable.owner,
                     onClick = { onHalamanJenisProperti() }
                 )
             }

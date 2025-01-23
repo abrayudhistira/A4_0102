@@ -3,6 +3,7 @@ package abrayudhistira.cobafinal.ui
 import abrayudhistira.cobafinal.application.ManajemenPropertyApplication
 import abrayudhistira.cobafinal.ui.jenisproperti.view.HomeJenisPropertiView
 import abrayudhistira.cobafinal.ui.jenisproperti.viewmodel.HomeJenisPropertiViewModel
+import abrayudhistira.cobafinal.ui.pemilik.viewmodel.HomePemilikViewModel
 import abrayudhistira.cobafinal.ui.property.HomePropertyViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
@@ -18,6 +19,10 @@ object PenyediaViewModel {
         initializer {
             HomeJenisPropertiViewModel(
                 ManajemenPropertyApplications().container.jenisPropertyRepository)
+        }
+        initializer {
+            HomePemilikViewModel(
+                ManajemenPropertyApplications().container.pemilikRepository)
         }
     }
 }

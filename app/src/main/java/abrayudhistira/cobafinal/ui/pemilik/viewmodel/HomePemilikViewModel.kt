@@ -3,7 +3,7 @@ package abrayudhistira.cobafinal.ui.pemilik.viewmodel
 import abrayudhistira.cobafinal.model.JenisProperti
 import abrayudhistira.cobafinal.model.Pemilik
 import abrayudhistira.cobafinal.repository.JenisPropertyRepository
-import abrayudhistira.cobafinal.repository.PemilikRespository
+import abrayudhistira.cobafinal.repository.PemilikRepository
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -20,7 +20,7 @@ sealed class HomePemilikUiState {
     object Loading : HomePemilikUiState()
 }
 
-class HomePemilikViewModel(private val pemilikRespository: PemilikRespository) : ViewModel() {
+class HomePemilikViewModel(private val pemilikRepository: PemilikRepository) : ViewModel() {
 
     var homePemilikUiState: HomePemilikUiState by mutableStateOf(HomePemilikUiState.Loading)
         private set
@@ -34,7 +34,7 @@ class HomePemilikViewModel(private val pemilikRespository: PemilikRespository) :
         viewModelScope.launch {
             homePemilikUiState = HomePemilikUiState.Loading
             try {
-                val jenisPropertiList = pemilikRespository.getPemilik()
+                val jenisPropertiList = pemilikRepository.getPemilik()
                 homePemilikUiState = HomePemilikUiState.Success(jenisPropertiList)
             } catch (e: IOException) {
                 homePemilikUiState = HomePemilikUiState.Error

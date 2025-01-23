@@ -2,9 +2,12 @@ package abrayudhistira.cobafinal.dependeciesinjection
 
 import abrayudhistira.cobafinal.repository.JenisPropertyRepository
 import abrayudhistira.cobafinal.repository.NetworkJenisPropertyRepository
+import abrayudhistira.cobafinal.repository.NetworkPemilikRepository
 import abrayudhistira.cobafinal.repository.NetworkPropertiRepository
+import abrayudhistira.cobafinal.repository.PemilikRepository
 import abrayudhistira.cobafinal.repository.PropertiRepository
 import abrayudhistira.cobafinal.service.JenisPropertyService
+import abrayudhistira.cobafinal.service.PemilikService
 import abrayudhistira.cobafinal.service.PropertyService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
@@ -55,5 +58,12 @@ class ManajemenPropertyContainer: AppContainer {
 
     override val jenisPropertyRepository : JenisPropertyRepository by lazy {
         NetworkJenisPropertyRepository(jenisPropertyService)
+    }
+
+    private val pemilikService : PemilikService by lazy {
+        retrofit.create(PemilikService::class.java)
+    }
+    val pemilikRepository : PemilikRepository by lazy {
+        NetworkPemilikRepository(pemilikService)
     }
 }

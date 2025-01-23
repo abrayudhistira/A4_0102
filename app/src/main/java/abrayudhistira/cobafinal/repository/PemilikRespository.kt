@@ -4,7 +4,7 @@ import abrayudhistira.cobafinal.model.Pemilik
 import abrayudhistira.cobafinal.service.PemilikService
 
 
-interface PemilikRespository {
+interface PemilikRepository {
     suspend fun getPemilik() : List<Pemilik>
     suspend fun getbyidPemilik(idPemilik : String): Pemilik
     suspend fun insertPemilik(idPemilik: Pemilik)
@@ -12,7 +12,7 @@ interface PemilikRespository {
     suspend fun deletePemilik(idPemilik: String)
 }
 class NetworkPemilikRepository(private val pemilikService: PemilikService)
-    : PemilikRespository {
+    : PemilikRepository {
     override suspend fun getPemilik(): List<Pemilik> = pemilikService.getPemilik()
     override suspend fun getbyidPemilik(idPemilik: String): Pemilik {
         return pemilikService.getbyidPemilik(idPemilik)

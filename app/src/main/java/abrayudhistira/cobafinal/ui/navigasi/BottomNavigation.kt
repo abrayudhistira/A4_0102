@@ -29,6 +29,7 @@ fun BottomNavigationBar(navController: NavController) {
         val items = listOf(
             DestinasiHomeJenisProperty,
             DestinasiMainScreen, // Main will be in the center
+            DestinasiHomePemilik,
         )
 
         val currentBackStack by navController.currentBackStackEntryAsState()
@@ -67,6 +68,7 @@ fun BottomNavigationBar(navController: NavController) {
                         when (destination) {
                             DestinasiHomeProperty -> Icon(painter = painterResource(id = R.drawable.property), contentDescription = "Properti")
                             DestinasiHomeJenisProperty -> Icon(painter = painterResource(id = R.drawable.jenisproperty), contentDescription = "Jenis Properti")
+                            DestinasiHomePemilik -> Icon(painter = painterResource(id = R.drawable.owner), contentDescription = "Pemilik")
 //                            DestinasiHomeBuku -> Icon(painter = painterResource(id = R.drawable.bukuputih), contentDescription = "Buku")
 //                            DestinasiHomeKategori -> Icon(painter = painterResource(id = R.drawable.kategoriputih), contentDescription = "Kategori")
 //                            DestinasiHomePenulis -> Icon(painter = painterResource(id = R.drawable.penulisputih), contentDescription = "Penulis")
