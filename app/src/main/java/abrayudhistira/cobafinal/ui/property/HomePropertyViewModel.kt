@@ -5,7 +5,13 @@ import abrayudhistira.cobafinal.repository.PropertiRepository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 
-class PropertiViewModel : ViewModel() {
+sealed class HomeUiState {
+    data class Success(val properti: List<Properti>) : HomeUiState()
+    object Error : HomeUiState()
+    object Loading : HomeUiState()
+}
+
+class HomePropertyViewModel() : ViewModel() {
 
     private val repository = PropertiRepository()
 
