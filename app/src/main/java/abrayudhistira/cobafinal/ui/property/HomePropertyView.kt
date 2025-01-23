@@ -46,6 +46,39 @@ object DestinasiHome: DestinasiNavigasi {
 }
 
 @Composable
+fun HomeStatus(
+    homeUiState: HomeUiState,
+    retryAction: () -> Unit,
+    modifier: Modifier = Modifier,
+    onDeleteClick: (Properti) -> Unit = {},
+    onDetailClick: (String) -> Unit
+){
+    when (homeUiState){
+        is HomeUiState.Loading-> OnLoading(modifier = modifier.fillMaxSize())
+
+
+        is HomeUiState.Success ->
+            if(homeUiState.properti.isEmpty()){
+                return Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center){
+                    Text(text = "Tidak ada data", style = MaterialTheme.typography.bodyMedium)
+                }
+            }else{
+                PropertyLayout(
+                    properti = homeUiState.properti,
+                    modifier = modifier.fillMaxWidth(),
+                    onDetailClick = {
+                        onDetailClick(it.id_properti.toString())
+                    },
+                    onDeleteClick={
+                        onDeleteClick(it)
+                    }
+                )
+            }
+        is HomeUiState.Error -> OnError(retryAction, modifier = modifier.fillMaxSize())
+    }
+}
+
+@Composable
 fun OnLoading(modifier: Modifier = Modifier) {
     Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Image(
