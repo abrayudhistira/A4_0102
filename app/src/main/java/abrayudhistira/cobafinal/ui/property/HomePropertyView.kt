@@ -6,12 +6,16 @@ import android.content.Context
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
@@ -34,7 +38,31 @@ object DestinasiHome: DestinasiNavigasi {
 }
 
 @Composable
-fun MhsCard(
+fun PropertyLayout(
+    properti: List<Properti>,
+    modifier: Modifier = Modifier,
+    onDetailClick: (Properti) -> Unit,
+    onDeleteClick: (Properti) -> Unit = {}
+) {
+    LazyColumn(
+        modifier = modifier,
+        contentPadding = PaddingValues(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        items(properti) { properti ->
+            PropertyCard(
+                properti = properti,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { onDetailClick(properti) },
+                onDeleteClick = { onDeleteClick(properti) }
+            )
+        }
+    }
+}
+
+@Composable
+fun PropertyCard(
     properti: Properti,
     modifier: Modifier = Modifier,
     onDeleteClick: (Properti) -> Unit = {},
