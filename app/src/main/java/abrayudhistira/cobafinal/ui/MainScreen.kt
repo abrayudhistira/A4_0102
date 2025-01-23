@@ -33,7 +33,8 @@ fun HomeApp(
     modifier: Modifier = Modifier,
     onHalamanProperti: () -> Unit,
     onHalamanJenisProperti: () -> Unit,
-    onHalamanPemilik: () -> Unit
+    onHalamanPemilik: () -> Unit,
+    onHalamanManajerProperti: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -86,8 +87,8 @@ fun HomeApp(
                     title = "Manajer Properti",
                     description = "Kelola Manajer Properti",
                     backgroundColor = Color.Black,
-                    iconResource = R.drawable.owner,
-                    onClick = { onHalamanJenisProperti() }
+                    iconResource = R.drawable.project_manager,
+                    onClick = { onHalamanManajerProperti() }
                 )
             }
         }

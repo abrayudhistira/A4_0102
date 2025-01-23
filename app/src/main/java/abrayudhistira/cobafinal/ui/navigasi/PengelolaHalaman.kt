@@ -2,6 +2,7 @@ package abrayudhistira.cobafinal.ui.navigasi
 
 import abrayudhistira.cobafinal.ui.HomeApp
 import abrayudhistira.cobafinal.ui.jenisproperti.view.HomeJenisPropertiView
+import abrayudhistira.cobafinal.ui.manajerproperti.view.HomeManajerPropertiView
 import abrayudhistira.cobafinal.ui.pemilik.view.HomePemilikView
 import abrayudhistira.cobafinal.ui.property.HomePropertyView
 import androidx.compose.foundation.layout.padding
@@ -39,6 +40,9 @@ fun PengelolaHalaman(
                     onHalamanPemilik = {
                         navController.navigate(DestinasiHomePemilik.route)
                     },
+                    onHalamanManajerProperti = {
+                        navController.navigate(DestinasiManajerProperty.route)
+                    },
                     modifier = modifier
                 )
             }
@@ -56,6 +60,12 @@ fun PengelolaHalaman(
             }
             composable(route = DestinasiHomePemilik.route) {
                 HomePemilikView(
+                    navController = navController,
+                    navigateToItemEntry = {navController.navigate(DestinasiEntry.route)}
+                )
+            }
+            composable(route = DestinasiManajerProperty.route) {
+                HomeManajerPropertiView(
                     navController = navController,
                     navigateToItemEntry = {navController.navigate(DestinasiEntry.route)}
                 )

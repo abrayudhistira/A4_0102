@@ -30,6 +30,7 @@ fun BottomNavigationBar(navController: NavController) {
             DestinasiHomeJenisProperty,
             DestinasiMainScreen, // Main will be in the center
             DestinasiHomePemilik,
+            DestinasiManajerProperty,
         )
 
         val currentBackStack by navController.currentBackStackEntryAsState()
@@ -38,7 +39,7 @@ fun BottomNavigationBar(navController: NavController) {
         // Add items to the left, center, and right
         items.forEachIndexed { index, destination ->
             // If it's the center item (DestinasiMainScreen), apply different layout
-            if (index == 1) { // Center item at index 2
+            if (index == 1) { // Center item at index 1
                 // Center item (Main)
                 NavigationBarItem(
                     icon = {
@@ -58,7 +59,7 @@ fun BottomNavigationBar(navController: NavController) {
                         }
                     },
                     modifier = Modifier
-                        .padding(horizontal = 8.dp)
+                        .padding(horizontal = 4.dp)
                         .weight(1f) // This makes the center item occupy more space
                 )
             } else {
@@ -67,12 +68,10 @@ fun BottomNavigationBar(navController: NavController) {
                     icon = {
                         when (destination) {
                             DestinasiHomeProperty -> Icon(painter = painterResource(id = R.drawable.property), contentDescription = "Properti")
+                            DestinasiMainScreen -> Icon(painter = painterResource(id = R.drawable.home), contentDescription = "Home")
                             DestinasiHomeJenisProperty -> Icon(painter = painterResource(id = R.drawable.jenisproperty), contentDescription = "Jenis Properti")
                             DestinasiHomePemilik -> Icon(painter = painterResource(id = R.drawable.owner), contentDescription = "Pemilik")
-//                            DestinasiHomeBuku -> Icon(painter = painterResource(id = R.drawable.bukuputih), contentDescription = "Buku")
-//                            DestinasiHomeKategori -> Icon(painter = painterResource(id = R.drawable.kategoriputih), contentDescription = "Kategori")
-//                            DestinasiHomePenulis -> Icon(painter = painterResource(id = R.drawable.penulisputih), contentDescription = "Penulis")
-//                            DestinasiHomePenerbit -> Icon(painter = painterResource(id = R.drawable.penerbitputih), contentDescription = "Penerbit")
+                            DestinasiManajerProperty -> Icon(painter = painterResource(id = R.drawable.project_manager), contentDescription = "Manajer Properti")
                         }
                     },
                     selected = currentDestination?.route == destination.route,

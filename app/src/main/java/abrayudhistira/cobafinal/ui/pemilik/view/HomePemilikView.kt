@@ -258,7 +258,7 @@ fun PemilikCard(
 
             Column {
                 Text(
-                    text = "Deskripsi: ${pemilik.kontak_pemilik}",
+                    text = "Nomor Kontak: ${pemilik.kontak_pemilik}",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurface
                 )
