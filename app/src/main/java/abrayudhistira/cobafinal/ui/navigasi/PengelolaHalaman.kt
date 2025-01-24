@@ -4,6 +4,7 @@ import abrayudhistira.cobafinal.ui.HomeApp
 import abrayudhistira.cobafinal.ui.jenisproperti.view.HomeJenisPropertiView
 import abrayudhistira.cobafinal.ui.manajerproperti.view.HomeManajerPropertiView
 import abrayudhistira.cobafinal.ui.pemilik.view.HomePemilikView
+import abrayudhistira.cobafinal.ui.pemilik.view.InsertViewPemilik
 import abrayudhistira.cobafinal.ui.property.HomePropertyView
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -61,8 +62,17 @@ fun PengelolaHalaman(
             composable(route = DestinasiHomePemilik.route) {
                 HomePemilikView(
                     navController = navController,
-                    navigateToItemEntry = {navController.navigate(DestinasiEntry.route)}
+                    navigateToItemEntry = {navController.navigate(DestinasiEntryPemilik.route)}
                 )
+            }
+            composable(route = DestinasiEntryPemilik.route) {
+                InsertViewPemilik( navigateBack = {
+                    navController.navigate(DestinasiHomePemilik.route){
+                        popUpTo(DestinasiHomePemilik.route){
+                            inclusive = true
+                        }
+                    }
+                })
             }
             composable(route = DestinasiManajerProperty.route) {
                 HomeManajerPropertiView(

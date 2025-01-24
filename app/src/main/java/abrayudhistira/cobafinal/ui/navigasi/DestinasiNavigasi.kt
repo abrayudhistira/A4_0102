@@ -30,6 +30,11 @@ object DestinasiHomePemilik : DestinasiNavigasi {
     override val titleRes = "Home Pemilik"
 }
 
+object DestinasiEntryPemilik : DestinasiNavigasi {
+    override val route = "entry_pemilik"
+    override val titleRes = "Entry Pemilik"
+}
+
 object DestinasiManajerProperty : DestinasiNavigasi {
     override val route = "home_manajer"
     override val titleRes = "Home Manajer Property"
