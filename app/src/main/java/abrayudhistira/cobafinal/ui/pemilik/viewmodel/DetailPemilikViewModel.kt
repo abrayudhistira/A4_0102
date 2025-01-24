@@ -17,7 +17,7 @@ class DetailPemilikViewModel(
     savedStateHandle: SavedStateHandle,
     private val pemilikRepository: PemilikRepository
 ) : ViewModel() {
-    private val idPemilik: String = checkNotNull(savedStateHandle[DestinasiDetailPemilik.idPemilikArg])
+    private val id_pemilik: Int = checkNotNull(savedStateHandle[DestinasiDetailPemilik.idPemilikArg])
 
     var detailPemilikUiState: DetailPemilikUiState by mutableStateOf(DetailPemilikUiState())
         private set
@@ -30,7 +30,7 @@ class DetailPemilikViewModel(
         viewModelScope.launch {
             detailPemilikUiState = DetailPemilikUiState(isLoading = true)
             try {
-                val result = pemilikRepository.getbyidPemilik(idPemilik)
+                val result = pemilikRepository.getbyidPemilik(id_pemilik.toString())
                 detailPemilikUiState = DetailPemilikUiState(
                     detailPemilikUiEvent = result.toDetailPemilikUiEvent(),
                     isLoading = false
@@ -60,21 +60,21 @@ data class DetailPemilikUiState(
 }
 
 data class DetailPemilikUiEvent(
-    val id_pemilik: Int = 0,
+    val idPemilik: Int = 0,
     val nama_pemilik: String = "",
     val kontak_pemilik: String = ""
 )
 
 fun Pemilik.toDetailPemilikUiEvent(): DetailPemilikUiEvent{
     return DetailPemilikUiEvent(
-        id_pemilik = id_pemilik,
+        idPemilik = idPemilik,
         nama_pemilik = nama_pemilik,
         kontak_pemilik = kontak_pemilik,
     )
 }
 fun DetailPemilikUiEvent.toPemilik(): Pemilik{
     return Pemilik(
-        id_pemilik = id_pemilik,
+        idPemilik = idPemilik,
         nama_pemilik = nama_pemilik,
         kontak_pemilik = kontak_pemilik,
     )

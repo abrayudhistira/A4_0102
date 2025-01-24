@@ -1,6 +1,9 @@
-package abrayudhistira.cobafinal.ui.pemilik.view
+package abrayudhistira.cobafinal.ui.jenisproperti.view
 
 import abrayudhistira.cobafinal.ui.PenyediaViewModel
+import abrayudhistira.cobafinal.ui.jenisproperti.viewmodel.InsertJenisPopertiViewModel
+import abrayudhistira.cobafinal.ui.jenisproperti.viewmodel.JenisPropertiUiEvent
+import abrayudhistira.cobafinal.ui.jenisproperti.viewmodel.JenisPropertiUiState1
 import abrayudhistira.cobafinal.ui.navigasi.CostumeTopAppBar
 import abrayudhistira.cobafinal.ui.navigasi.DestinasiNavigasi
 import abrayudhistira.cobafinal.ui.pemilik.viewmodel.InsertPemilikViewModel
@@ -30,17 +33,17 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.launch
 
-object DestinasiEntryPemilik : DestinasiNavigasi {
-    override val route = "entry_pemilik"
-    override val titleRes = "Entry Pemilik"
+object DestinasiInsertJenisProperty : DestinasiNavigasi {
+    override val route = "insert_jenis_property"
+    override val titleRes = "Insert Jenis Property"
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun InsertViewPemilik(
+fun InsertViewJenisProperty(
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: InsertPemilikViewModel = viewModel(factory = PenyediaViewModel.Factory)
+    viewModel: InsertJenisPopertiViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
     val coroutineScope = rememberCoroutineScope()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -48,19 +51,19 @@ fun InsertViewPemilik(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             CostumeTopAppBar(
-                title = DestinasiEntryPemilik.titleRes,
+                title = DestinasiInsertJenisProperty.titleRes,
                 canNavigateBack = true,
                 scrollBehavior = scrollBehavior,
                 navigateUp = navigateBack
             )
         }
     ) { innerPadding ->
-        EntryPemilikBody(
-            pemilikUiState1 = viewModel.uiState,
-            onPemilikValueChange = {event -> viewModel.updateInsertPemilikState(event) },
+        EntryJenisPropertiBody(
+            jenisPropertiUiState1 = viewModel.uiState,
+            onJenisPropertiValueChange = {event -> viewModel.updateInsertJenisPropertiState(event) },
             onSaveClick = {
                 coroutineScope.launch {
-                    viewModel.insertpemilik()
+                    viewModel.insertjenisPemilik()
                     navigateBack()
                 }
             },
@@ -73,9 +76,9 @@ fun InsertViewPemilik(
 }
 
 @Composable
-fun EntryPemilikBody(
-    pemilikUiState1: PemilikUiState1,
-    onPemilikValueChange: (PemilikUiEvent) -> Unit,
+fun EntryJenisPropertiBody(
+    jenisPropertiUiState1: JenisPropertiUiState1,
+    onJenisPropertiValueChange: (JenisPropertiUiEvent) -> Unit,
     onSaveClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -84,8 +87,8 @@ fun EntryPemilikBody(
         modifier = modifier.padding(12.dp)
     ) {
         FormInputPemilik(
-            pemilikUiEvent = pemilikUiState1.pemilikUiEvent,
-            onValueChange = onPemilikValueChange,
+            jenisPropertiUiEvent = jenisPropertiUiState1.jenisPropertiUiEvent,
+            onValueChange = onJenisPropertiValueChange,
             modifier = Modifier.fillMaxWidth()
         )
         Button(
@@ -102,9 +105,9 @@ fun EntryPemilikBody(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FormInputPemilik(
-    pemilikUiEvent: PemilikUiEvent,
+    jenisPropertiUiEvent: JenisPropertiUiEvent,
     modifier: Modifier = Modifier,
-    onValueChange: (PemilikUiEvent) -> Unit,
+    onValueChange: (JenisPropertiUiEvent) -> Unit,
     enabled: Boolean = true
 ) {
     Column(
@@ -113,9 +116,9 @@ fun FormInputPemilik(
     ) {
         // Nama Pemilik TextField
         OutlinedTextField(
-            value = pemilikUiEvent.nama_pemilik,
-            onValueChange = { onValueChange(pemilikUiEvent.copy(nama_pemilik = it)) },
-            label = { Text("Nama Pemilik") },
+            value = jenisPropertiUiEvent.nama_jenis,
+            onValueChange = { onValueChange(jenisPropertiUiEvent.copy(nama_jenis = it)) },
+            label = { Text("Nama Jenis Property") },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
             singleLine = true,
@@ -129,21 +132,23 @@ fun FormInputPemilik(
         )
 
         // Kontak Pemilik TextField
-        OutlinedTextField(
-            value = pemilikUiEvent.kontak_pemilik,
-            onValueChange = { onValueChange(pemilikUiEvent.copy(kontak_pemilik = it)) },
-            label = { Text("Nomor Kontak / HP") },
-            modifier = Modifier.fillMaxWidth(),
-            enabled = enabled,
-            singleLine = true,
-            shape = MaterialTheme.shapes.medium,
-            colors = MaterialTheme.colorScheme.run {
-                TextFieldDefaults.outlinedTextFieldColors(
-                    focusedBorderColor = primary,
-                    unfocusedBorderColor = onSurfaceVariant.copy(alpha = 0.5f)
-                )
-            }
-        )
+        jenisPropertiUiEvent.deskripsi_jenis?.let {
+            OutlinedTextField(
+                value = it,
+                onValueChange = { onValueChange(jenisPropertiUiEvent.copy(deskripsi_jenis = it)) },
+                label = { Text("Deskripsi Jenis") },
+                modifier = Modifier.fillMaxWidth(),
+                enabled = enabled,
+                singleLine = true,
+                shape = MaterialTheme.shapes.medium,
+                colors = MaterialTheme.colorScheme.run {
+                    TextFieldDefaults.outlinedTextFieldColors(
+                        focusedBorderColor = primary,
+                        unfocusedBorderColor = onSurfaceVariant.copy(alpha = 0.5f)
+                    )
+                }
+            )
+        }
 
         // Instructions Text
         if (enabled) {

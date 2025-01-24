@@ -116,7 +116,7 @@ fun HomePemilikView(
             modifier = Modifier.padding(innerPadding),
             onDetailClick = onDetailClick,
             onDeleteClick = {
-                //viewModel.delete
+                viewModel.deletePemilik(it.idPemilik)
                 viewModel.getPemilik()
             }
         )
@@ -144,8 +144,9 @@ fun PemilikStatus(
                 PemilikLayout(
                     pemilik = pemilikUiState.pemilik,
                     modifier = modifier.fillMaxWidth(),
-                    onDetailClick = {
-                        onDetailClick(it.id_pemilik.toString())
+                    onDetailClick = { pemilik ->
+                        println("PemilikLayout: onDetailClick called for ID : ${pemilik.idPemilik}")
+                        onDetailClick(pemilik.idPemilik.toString())
                     },
                     onDeleteClick={
                         onDeleteClick(it)
@@ -201,7 +202,10 @@ fun PemilikLayout(
                 pemilik = pemilik,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable { onDetailClick(pemilik) },
+                    .clickable {
+                        println("Card clicked for pemilik: ${pemilik.nama_pemilik}, ID: ${pemilik.idPemilik}") // Log untuk debugging
+                        onDetailClick(pemilik)
+                    },
                 onDeleteClick = { onDeleteClick(pemilik) }
             )
         }
@@ -244,14 +248,14 @@ fun PemilikCard(
                     )
                 }
 
-                // Edit Button
-                IconButton(onClick = { onEditClick(pemilik) }) {
-                    Icon(
-                        imageVector = Icons.Default.Edit, // You can use a built-in edit icon or a custom one
-                        contentDescription = "Edit Property",
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                }
+//                // Edit Button
+//                IconButton(onClick = { onEditClick(pemilik) }) {
+//                    Icon(
+//                        imageVector = Icons.Default.Edit, // You can use a built-in edit icon or a custom one
+//                        contentDescription = "Edit Property",
+//                        tint = MaterialTheme.colorScheme.primary
+//                    )
+//                }
             }
 
             Divider()

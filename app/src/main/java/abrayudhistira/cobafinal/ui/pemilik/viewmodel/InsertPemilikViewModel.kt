@@ -44,21 +44,21 @@ data class PemilikUiState1(
 
 // Define the event class representing a category
 data class PemilikUiEvent(
-    val id_pemilik: Int = 0,
+    val idPemilik: Int = 0,
     val nama_pemilik: String = "",
     val kontak_pemilik: String = ""
 )
 
 // Extension function to convert KategoriUiEvent to Kategori (Model class)
 fun PemilikUiEvent.toPmlk(): Pemilik = Pemilik(
-    id_pemilik = id_pemilik,
+    idPemilik = idPemilik,
     nama_pemilik = nama_pemilik,
     kontak_pemilik = kontak_pemilik
 )
 
 // Extension function to convert Kategori model to KategoriUiEvent
 fun Pemilik.toUiStatePmlk(): PemilikUiEvent = PemilikUiEvent(
-    id_pemilik = id_pemilik,
+    idPemilik = idPemilik,
     nama_pemilik = nama_pemilik,
     kontak_pemilik = kontak_pemilik
 )

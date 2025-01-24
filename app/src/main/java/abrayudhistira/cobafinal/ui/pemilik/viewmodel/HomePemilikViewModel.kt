@@ -43,4 +43,31 @@ class HomePemilikViewModel(private val pemilikRepository: PemilikRepository) : V
             }
         }
     }
+    fun getbyidPemilik(
+        id_pemilik: Int,
+        onSuccess: (Pemilik) -> Unit,
+        onError: () -> Unit) {
+        viewModelScope.launch {
+            try {
+                val pemilik = pemilikRepository.getbyidPemilik(id_pemilik.toString())
+                onSuccess(pemilik)
+            } catch (e: IOException) {
+                onError()
+            } catch (e: HttpException) {
+                onError()
+            }
+        }
+    }
+    fun deletePemilik(id_pemilik: Int) {
+        viewModelScope.launch {
+            try {
+                pemilikRepository.deletePemilik(id_pemilik.toString())
+                getPemilik()
+            } catch (e: IOException) {
+                homePemilikUiState = HomePemilikUiState.Error
+            } catch (e: HttpException) {
+                homePemilikUiState = HomePemilikUiState.Error
+            }
+        }
+    }
 }
