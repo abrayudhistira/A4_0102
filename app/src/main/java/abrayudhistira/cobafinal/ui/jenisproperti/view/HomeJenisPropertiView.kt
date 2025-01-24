@@ -113,7 +113,7 @@ fun HomeJenisPropertiView(
             modifier = Modifier.padding(innerPadding),
             onDetailClick = onDetailClick,
             onDeleteClick = {
-                //viewModel.delete
+                viewModel.deleteJenisProperty(it.idJenis)
                 viewModel.getJenisProperti()
             }
         )
@@ -241,14 +241,6 @@ fun JenisPropertyCard(
                     )
                 }
 
-                // Edit Button
-                IconButton(onClick = { onEditClick(jenisProperti) }) {
-                    Icon(
-                        imageVector = Icons.Default.Edit, // You can use a built-in edit icon or a custom one
-                        contentDescription = "Edit Property",
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                }
             }
 
             Divider()

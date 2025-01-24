@@ -23,7 +23,18 @@ object DestinasiInsertJenisProperty : DestinasiNavigasi {
     override val route = "insert_jenis_property"
     override val titleRes = "Insert Jenis Property"
 }
-
+object DestinasiUpdateJenisProperti : DestinasiNavigasi {
+    override val route = "update_jenis_property"
+    override val titleRes = "Update Property"
+    const val idJenisArg = "idJenis"
+    val routewithArgument = "$route/{$idJenisArg}"
+}
+object DestinasiDetailJenisProperti : DestinasiNavigasi {
+    override val route = "detail_jenis_properti"
+    override val titleRes = "Detail Jenis Property"
+    const val idJenisArg = "idJenis"
+    val routewithArgument = "$route/{$idJenisArg}"
+}
 object DestinasiHomePemilik : DestinasiNavigasi {
     override val route = "home_pemilik"
     override val titleRes = "Home Pemilik"

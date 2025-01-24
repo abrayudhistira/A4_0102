@@ -4,6 +4,7 @@ import abrayudhistira.cobafinal.model.JenisProperti
 import abrayudhistira.cobafinal.model.Properti
 import abrayudhistira.cobafinal.repository.JenisPropertyRepository
 import abrayudhistira.cobafinal.repository.PropertiRepository
+import abrayudhistira.cobafinal.ui.pemilik.viewmodel.HomePemilikUiState
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -56,4 +57,16 @@ class HomeJenisPropertiViewModel(private val jenisPropertyRepository: JenisPrope
 //            }
 //        }
 //    }
+    fun deleteJenisProperty(idJenis: Int) {
+        viewModelScope.launch {
+            try {
+                jenisPropertyRepository.deleteJenisProperti(idJenis.toString())
+                getJenisProperti()
+            } catch (e: IOException) {
+                homeJenisPropertiUiState = HomeJenisPropertiUiState.Error
+            } catch (e: HttpException) {
+                homeJenisPropertiUiState = HomeJenisPropertiUiState.Error
+            }
+        }
+    }
 }

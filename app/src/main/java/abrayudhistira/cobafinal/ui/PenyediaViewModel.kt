@@ -2,8 +2,10 @@ package abrayudhistira.cobafinal.ui
 
 import abrayudhistira.cobafinal.application.ManajemenPropertyApplication
 import abrayudhistira.cobafinal.ui.jenisproperti.view.HomeJenisPropertiView
+import abrayudhistira.cobafinal.ui.jenisproperti.viewmodel.DetailJenisPropertiViewModel
 import abrayudhistira.cobafinal.ui.jenisproperti.viewmodel.HomeJenisPropertiViewModel
 import abrayudhistira.cobafinal.ui.jenisproperti.viewmodel.InsertJenisPopertiViewModel
+import abrayudhistira.cobafinal.ui.jenisproperti.viewmodel.UpdateJenisPropertiViewModel
 import abrayudhistira.cobafinal.ui.manajerproperti.viewmodel.HomeManajerPropertiViewModel
 import abrayudhistira.cobafinal.ui.pemilik.viewmodel.DetailPemilikViewModel
 import abrayudhistira.cobafinal.ui.pemilik.viewmodel.HomePemilikViewModel
@@ -28,6 +30,16 @@ object PenyediaViewModel {
         }
         initializer {
             InsertJenisPopertiViewModel(
+                createSavedStateHandle(),
+                ManajemenPropertyApplications().container.jenisPropertyRepository)
+        }
+        initializer {
+            DetailJenisPropertiViewModel(
+                createSavedStateHandle(),
+                ManajemenPropertyApplications().container.jenisPropertyRepository)
+        }
+        initializer {
+            UpdateJenisPropertiViewModel(
                 createSavedStateHandle(),
                 ManajemenPropertyApplications().container.jenisPropertyRepository)
         }

@@ -1,8 +1,11 @@
 package abrayudhistira.cobafinal.ui.navigasi
 
 import abrayudhistira.cobafinal.ui.HomeApp
+import abrayudhistira.cobafinal.ui.jenisproperti.view.DestinasiUpdateJenisProperti
+import abrayudhistira.cobafinal.ui.jenisproperti.view.DetailJenisPropertiView
 import abrayudhistira.cobafinal.ui.jenisproperti.view.HomeJenisPropertiView
 import abrayudhistira.cobafinal.ui.jenisproperti.view.InsertViewJenisProperty
+import abrayudhistira.cobafinal.ui.jenisproperti.view.UpdateJenisPropertiView
 import abrayudhistira.cobafinal.ui.manajerproperti.view.HomeManajerPropertiView
 import abrayudhistira.cobafinal.ui.pemilik.view.DetailPemilikView
 import abrayudhistira.cobafinal.ui.pemilik.view.HomePemilikView
@@ -62,7 +65,10 @@ fun PengelolaHalaman(
             composable(route = DestinasiHomeJenisProperty.route) {
                 HomeJenisPropertiView(
                     navController = navController,
-                    navigateToItemEntry = { navController.navigate(DestinasiInsertJenisProperty.route) }
+                    navigateToItemEntry = { navController.navigate(DestinasiInsertJenisProperty.route) },
+                    onDetailClick = { idJenis ->
+                        navController.navigate("${DestinasiUpdateJenisProperti.route}/$idJenis")
+                    }
                 )
             }
             composable(route = DestinasiInsertJenisProperty.route) {
@@ -73,6 +79,47 @@ fun PengelolaHalaman(
                         }
                     }
                 })
+            }
+            composable(
+                route = DestinasiDetailJenisProperti.routewithArgument,
+                arguments = listOf(
+                    navArgument(DestinasiDetailJenisProperti.idJenisArg) {
+                        type = NavType.IntType
+                    }
+                )
+            ) { backStackEntry ->
+                val idJenis = backStackEntry.arguments?.getInt(DestinasiDetailJenisProperti.idJenisArg)
+                println("DetailJenisProperty called with ID: $idJenis")
+                idJenis?.let { id ->
+                    DetailJenisPropertiView(
+                        navigateBack = {
+                            navController.navigate(DestinasiHomeJenisProperty.route) {
+                                popUpTo(DestinasiHomeJenisProperty.route) {
+                                    inclusive = true
+                                }
+                            }
+                        },
+                        navigateToEdit = {
+                            navController.navigate("${DestinasiUpdatePemilik.route}/$idJenis")
+                        }
+                    )
+                }
+            }
+            composable(
+                route = DestinasiUpdateJenisProperti.routewithArgument,
+                arguments = listOf(
+                    navArgument(DestinasiUpdateJenisProperti.idJenisArg) {
+                        type = NavType.IntType
+                    }
+                )
+            ) { backStackEntry ->
+                val idJenis = backStackEntry.arguments?.getInt(DestinasiUpdateJenisProperti.idJenisArg)
+                idJenis?.let { id ->
+                    UpdateJenisPropertiView(
+                        onBack = { navController.popBackStack() },
+                        onNavigate = { navController.popBackStack() }
+                    )
+                }
             }
             composable(route = DestinasiHomePemilik.route) {
                 HomePemilikView(
