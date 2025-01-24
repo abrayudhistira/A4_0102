@@ -34,8 +34,15 @@ object DestinasiEntryPemilik : DestinasiNavigasi {
     override val route = "entry_pemilik"
     override val titleRes = "Entry Pemilik"
 }
+object DestinasiDetailPemilik : DestinasiNavigasi {
+    override val route = "detail_pemilik"
+    override val titleRes = "Detail Pemilik"
+    const val idPemilikArg = "idPemilik"
+    const val routewithArgument = "detailPemilik/{idPemilik}"
+}
 
 object DestinasiManajerProperty : DestinasiNavigasi {
     override val route = "home_manajer"
     override val titleRes = "Home Manajer Property"
+
 }

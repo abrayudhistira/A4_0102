@@ -5,6 +5,7 @@ import abrayudhistira.cobafinal.ui.jenisproperti.view.HomeJenisPropertiView
 import abrayudhistira.cobafinal.ui.jenisproperti.viewmodel.HomeJenisPropertiViewModel
 import abrayudhistira.cobafinal.ui.manajerproperti.viewmodel.HomeManajerPropertiViewModel
 import abrayudhistira.cobafinal.ui.pemilik.view.InsertViewPemilik
+import abrayudhistira.cobafinal.ui.pemilik.viewmodel.DetailPemilikViewModel
 import abrayudhistira.cobafinal.ui.pemilik.viewmodel.HomePemilikViewModel
 import abrayudhistira.cobafinal.ui.pemilik.viewmodel.InsertPemilikViewModel
 import abrayudhistira.cobafinal.ui.property.HomePropertyViewModel
@@ -29,13 +30,19 @@ object PenyediaViewModel {
                 ManajemenPropertyApplications().container.pemilikRepository)
         }
         initializer {
-            HomeManajerPropertiViewModel(
-                ManajemenPropertyApplications().container.manajerPropertyRepository)
-        }
-        initializer {
             InsertPemilikViewModel(
                 createSavedStateHandle(),
                 ManajemenPropertyApplications().container.pemilikRepository)
+        }
+        initializer {
+            DetailPemilikViewModel(
+                createSavedStateHandle(),
+                ManajemenPropertyApplications().container.pemilikRepository
+            )
+        }
+        initializer {
+            HomeManajerPropertiViewModel(
+                ManajemenPropertyApplications().container.manajerPropertyRepository)
         }
     }
 }
