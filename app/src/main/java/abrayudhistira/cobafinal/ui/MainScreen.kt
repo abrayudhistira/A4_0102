@@ -80,7 +80,7 @@ fun HomeApp(
                     title = "Pemilik",
                     description = "Kelola Pemilik",
                     backgroundColor = Color.Black, // Darker box background
-                    iconResource = R.drawable.owner,
+                    iconResource = R.drawable.ownerwhite,
                     onClick = { onHalamanPemilik() }
                 )
                 Spacer(Modifier.height(16.dp))
@@ -88,7 +88,7 @@ fun HomeApp(
                     title = "Manajer Properti",
                     description = "Kelola Manajer Properti",
                     backgroundColor = Color.Black,
-                    iconResource = R.drawable.project_manager,
+                    iconResource = R.drawable.manager,
                     onClick = { onHalamanManajerProperti() }
                 )
             }
@@ -107,7 +107,7 @@ fun ManageBox(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .background(color = backgroundColor, shape = RoundedCornerShape(16.dp))
+            .background(color = backgroundColor, shape = RoundedCornerShape(10.dp))
             .clickable { onClick() }
             .padding(16.dp)
     ) {
@@ -121,21 +121,21 @@ fun ManageBox(
                 painter = painterResource(id = iconResource),
                 contentDescription = "$title Icon",
                 modifier = Modifier
-                    .size(50.dp) // Sesuaikan ukuran ikon jika diperlukan
-                    .clip(CircleShape)
+                    .size(30.dp) // Sesuaikan ukuran ikon jika diperlukan
+                    //.clip(CircleShape)
             )
 
             // Judul di bawah ikon
             Text(
                 text = title,
-                fontSize = 20.sp,
+                fontSize = 15.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.White
             )
 
             Text(
                 text = description,
-                fontSize = 14.sp,
+                fontSize = 11.sp,
                 color = Color(0xFFE0E0E0) // Warna abu-abu untuk deskripsi
             )
         }

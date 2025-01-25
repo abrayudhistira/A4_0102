@@ -28,9 +28,10 @@ fun BottomNavigationBar(navController: NavController) {
     ) {
         val items = listOf(
             DestinasiHomeJenisProperty,
+            DestinasiHomeManajerProperty,
             DestinasiMainScreen, // Main will be in the center
             DestinasiHomePemilik,
-            DestinasiHomeManajerProperty,
+            DestinasiHomeProperty
         )
 
         val currentBackStack by navController.currentBackStackEntryAsState()
@@ -39,7 +40,7 @@ fun BottomNavigationBar(navController: NavController) {
         // Add items to the left, center, and right
         items.forEachIndexed { index, destination ->
             // If it's the center item (DestinasiMainScreen), apply different layout
-            if (index == 1) { // Center item at index 1
+            if (index == 2) { // Center item at index 1
                 // Center item (Main)
                 NavigationBarItem(
                     icon = {
@@ -67,11 +68,10 @@ fun BottomNavigationBar(navController: NavController) {
                 NavigationBarItem(
                     icon = {
                         when (destination) {
-                            DestinasiHomeProperty -> Icon(painter = painterResource(id = R.drawable.property), contentDescription = "Properti")
-                            DestinasiMainScreen -> Icon(painter = painterResource(id = R.drawable.home), contentDescription = "Home")
                             DestinasiHomeJenisProperty -> Icon(painter = painterResource(id = R.drawable.jenisproperty), contentDescription = "Jenis Properti")
-                            DestinasiHomePemilik -> Icon(painter = painterResource(id = R.drawable.owner), contentDescription = "Pemilik")
                             DestinasiHomeManajerProperty -> Icon(painter = painterResource(id = R.drawable.project_manager), contentDescription = "Manajer Properti")
+                            DestinasiHomePemilik -> Icon(painter = painterResource(id = R.drawable.owner), contentDescription = "Pemilik")
+                            DestinasiHomeProperty -> Icon(painter = painterResource(id = R.drawable.property), contentDescription = "Properti")
                         }
                     },
                     selected = currentDestination?.route == destination.route,
