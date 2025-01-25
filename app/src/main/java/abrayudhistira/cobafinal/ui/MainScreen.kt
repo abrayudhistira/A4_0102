@@ -62,7 +62,7 @@ fun HomeApp(
                 ManageBox(
                     title = "Properti",
                     description = "Kelola Properti",
-                    backgroundColor = Color.Black, // Darker box background
+                    backgroundColor = Color.DarkGray, // Darker box background
                     iconResource = R.drawable.property,
                     onClick = { onHalamanProperti() }
                 )
@@ -70,7 +70,7 @@ fun HomeApp(
                 ManageBox(
                     title = "Jenis Properti",
                     description = "Kelola Jenis Properti",
-                    backgroundColor = Color.Black,
+                    backgroundColor = Color.DarkGray,
                     iconResource = R.drawable.jenisproperty,
                     onClick = { onHalamanJenisProperti() }
                 )
@@ -79,7 +79,7 @@ fun HomeApp(
                 ManageBox(
                     title = "Pemilik",
                     description = "Kelola Pemilik",
-                    backgroundColor = Color.Black, // Darker box background
+                    backgroundColor = Color.DarkGray, // Darker box background
                     iconResource = R.drawable.ownerwhite,
                     onClick = { onHalamanPemilik() }
                 )
@@ -87,7 +87,7 @@ fun HomeApp(
                 ManageBox(
                     title = "Manajer Properti",
                     description = "Kelola Manajer Properti",
-                    backgroundColor = Color.Black,
+                    backgroundColor = Color.DarkGray,
                     iconResource = R.drawable.manager,
                     onClick = { onHalamanManajerProperti() }
                 )

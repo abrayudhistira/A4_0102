@@ -14,11 +14,10 @@ import abrayudhistira.cobafinal.ui.pemilik.view.DetailPemilikView
 import abrayudhistira.cobafinal.ui.pemilik.view.HomePemilikView
 import abrayudhistira.cobafinal.ui.pemilik.view.InsertViewPemilik
 import abrayudhistira.cobafinal.ui.pemilik.view.UpdatePemilikView
-import abrayudhistira.cobafinal.ui.property.HomePropertyView
+import abrayudhistira.cobafinal.ui.property.view.HomePropertyView
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.internal.composableLambda
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType

@@ -1,7 +1,6 @@
 package abrayudhistira.cobafinal.ui
 
 import abrayudhistira.cobafinal.application.ManajemenPropertyApplication
-import abrayudhistira.cobafinal.ui.jenisproperti.view.HomeJenisPropertiView
 import abrayudhistira.cobafinal.ui.jenisproperti.viewmodel.DetailJenisPropertiViewModel
 import abrayudhistira.cobafinal.ui.jenisproperti.viewmodel.HomeJenisPropertiViewModel
 import abrayudhistira.cobafinal.ui.jenisproperti.viewmodel.InsertJenisPopertiViewModel
@@ -14,7 +13,7 @@ import abrayudhistira.cobafinal.ui.pemilik.viewmodel.DetailPemilikViewModel
 import abrayudhistira.cobafinal.ui.pemilik.viewmodel.HomePemilikViewModel
 import abrayudhistira.cobafinal.ui.pemilik.viewmodel.InsertPemilikViewModel
 import abrayudhistira.cobafinal.ui.pemilik.viewmodel.UpdatePemilikViewModel
-import abrayudhistira.cobafinal.ui.property.HomePropertyViewModel
+import abrayudhistira.cobafinal.ui.property.viewmodel.HomePropertyViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewmodel.CreationExtras

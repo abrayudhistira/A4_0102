@@ -1,4 +1,4 @@
-package abrayudhistira.cobafinal.ui.property
+package abrayudhistira.cobafinal.ui.property.viewmodel
 
 import abrayudhistira.cobafinal.model.Properti
 import abrayudhistira.cobafinal.repository.PropertiRepository
@@ -6,7 +6,6 @@ import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch

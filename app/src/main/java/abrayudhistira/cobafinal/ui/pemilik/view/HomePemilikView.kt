@@ -1,23 +1,10 @@
 package abrayudhistira.cobafinal.ui.pemilik.view
 
-import abrayudhistira.cobafinal.ui.property.HomePropertyViewModel
-import abrayudhistira.cobafinal.ui.property.HomeUiState
-
 import abrayudhistira.cobafinal.R
-import abrayudhistira.cobafinal.model.JenisProperti
 import abrayudhistira.cobafinal.model.Pemilik
-import abrayudhistira.cobafinal.model.Properti
 import abrayudhistira.cobafinal.ui.PenyediaViewModel
-import abrayudhistira.cobafinal.ui.jenisproperti.viewmodel.HomeJenisPropertiUiState
-import abrayudhistira.cobafinal.ui.jenisproperti.viewmodel.HomeJenisPropertiViewModel
-import abrayudhistira.cobafinal.ui.navigasi.CostumeTopAppBar
-import abrayudhistira.cobafinal.ui.navigasi.DestinasiNavigasi
 import abrayudhistira.cobafinal.ui.pemilik.viewmodel.HomePemilikUiState
 import abrayudhistira.cobafinal.ui.pemilik.viewmodel.HomePemilikViewModel
-import android.content.Context
-import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -36,7 +23,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -62,7 +48,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.recyclerview.widget.RecyclerView
 
 
 @OptIn(ExperimentalMaterial3Api::class)

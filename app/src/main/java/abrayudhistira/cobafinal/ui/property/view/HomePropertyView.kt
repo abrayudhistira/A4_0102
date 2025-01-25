@@ -1,14 +1,10 @@
-package abrayudhistira.cobafinal.ui.property
+package abrayudhistira.cobafinal.ui.property.view
 
 import abrayudhistira.cobafinal.R
 import abrayudhistira.cobafinal.model.Properti
 import abrayudhistira.cobafinal.ui.PenyediaViewModel
-import abrayudhistira.cobafinal.ui.navigasi.CostumeTopAppBar
-import abrayudhistira.cobafinal.ui.navigasi.DestinasiNavigasi
-import android.content.Context
-import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
+import abrayudhistira.cobafinal.ui.property.viewmodel.HomePropertyViewModel
+import abrayudhistira.cobafinal.ui.property.viewmodel.HomeUiState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -53,7 +49,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.recyclerview.widget.RecyclerView
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -234,27 +229,38 @@ fun PropertyCard(
                         tint = MaterialTheme.colorScheme.error
                     )
                 }
-
-                // Edit Button
-                IconButton(onClick = { onEditClick(properti) }) {
-                    Icon(
-                        imageVector = Icons.Default.Edit, // You can use a built-in edit icon or a custom one
-                        contentDescription = "Edit Property",
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                }
             }
-
             Divider()
-
             Column {
                 Text(
                     text = "Lokasi: ${properti.lokasi}",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurface
+                    color = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.padding(bottom = 4.dp)
                 )
                 Text(
                     text = "Harga: ${properti.Harga}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.padding(bottom = 4.dp)
+                )
+                Divider()
+                Text(
+                    text = "Jenis Properti: ${properti.nama_jenis}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.padding(bottom = 4.dp)
+                )
+                Divider()
+                Text(
+                    text = "Pemilik: ${properti.nama_pemilik}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.padding(bottom = 4.dp)
+                )
+                Divider()
+                Text(
+                    text = "Manajer: ${properti.nama_manajer}",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurface
                 )
