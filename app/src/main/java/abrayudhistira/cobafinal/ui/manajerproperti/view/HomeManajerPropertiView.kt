@@ -93,9 +93,9 @@ fun HomeManajerPropertiView(
                     IconButton(onClick ={navController.popBackStack() }) {
                         Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
                     }
-//                    IconButton(onClick ={viewModel.getManajerProperti() }) {
-//                        Icon(imageVector = Icons.Default.Refresh, contentDescription = "Refresh")
-//                    }
+                    IconButton(onClick ={viewModel.getManajerProperti() }) {
+                        Icon(imageVector = Icons.Default.Refresh, contentDescription = "Refresh")
+                    }
                 },
                 scrollBehavior = scrollBehavior
             )
@@ -116,7 +116,7 @@ fun HomeManajerPropertiView(
             modifier = Modifier.padding(innerPadding),
             onDetailClick = onDetailClick,
             onDeleteClick = {
-                //viewModel.delete
+                viewModel.deleteManajer(it.id_manajer)
                 viewModel.getManajerProperti()
             }
         )
@@ -243,22 +243,11 @@ fun ManajerPropertyCard(
                         tint = MaterialTheme.colorScheme.error
                     )
                 }
-
-                // Edit Button
-                IconButton(onClick = { onEditClick(manajerProperti) }) {
-                    Icon(
-                        imageVector = Icons.Default.Edit, // You can use a built-in edit icon or a custom one
-                        contentDescription = "Edit Property",
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                }
             }
-
             Divider()
-
             Column {
                 Text(
-                    text = "Deskripsi: ${manajerProperti.kontak_manajer}",
+                    text = "Kontak : ${manajerProperti.kontak_manajer}",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurface
                 )

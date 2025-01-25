@@ -30,7 +30,7 @@ class NetworkManajerPropertyRepository(private val manajerPropertiService: Manaj
         try {
             val response = manajerPropertiService.deleteManajerProperti(idManajerProperti)
             if (!response.isSuccessful) {
-                throw Exception("Failed to delete jenis properti. HTTP Status Code: ${response.code()}")
+                throw Exception("Failed to delete manajer properti. HTTP Status Code: ${response.code()}")
             }
             else{
                 response.message()

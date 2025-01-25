@@ -6,7 +6,10 @@ import abrayudhistira.cobafinal.ui.jenisproperti.viewmodel.DetailJenisPropertiVi
 import abrayudhistira.cobafinal.ui.jenisproperti.viewmodel.HomeJenisPropertiViewModel
 import abrayudhistira.cobafinal.ui.jenisproperti.viewmodel.InsertJenisPopertiViewModel
 import abrayudhistira.cobafinal.ui.jenisproperti.viewmodel.UpdateJenisPropertiViewModel
+import abrayudhistira.cobafinal.ui.manajerproperti.viewmodel.DetailManajemenPropertiViewModel
 import abrayudhistira.cobafinal.ui.manajerproperti.viewmodel.HomeManajerPropertiViewModel
+import abrayudhistira.cobafinal.ui.manajerproperti.viewmodel.InsertManajemenPopertiViewModel
+import abrayudhistira.cobafinal.ui.manajerproperti.viewmodel.UpdateManajemenPropertiViewModel
 import abrayudhistira.cobafinal.ui.pemilik.viewmodel.DetailPemilikViewModel
 import abrayudhistira.cobafinal.ui.pemilik.viewmodel.HomePemilikViewModel
 import abrayudhistira.cobafinal.ui.pemilik.viewmodel.InsertPemilikViewModel
@@ -66,6 +69,21 @@ object PenyediaViewModel {
         }
         initializer {
             HomeManajerPropertiViewModel(
+                ManajemenPropertyApplications().container.manajerPropertyRepository)
+        }
+        initializer {
+            InsertManajemenPopertiViewModel(
+                createSavedStateHandle(),
+                ManajemenPropertyApplications().container.manajerPropertyRepository)
+        }
+        initializer {
+            UpdateManajemenPropertiViewModel(
+                createSavedStateHandle(),
+                ManajemenPropertyApplications().container.manajerPropertyRepository)
+        }
+        initializer {
+            DetailManajemenPropertiViewModel(
+                createSavedStateHandle(),
                 ManajemenPropertyApplications().container.manajerPropertyRepository)
         }
     }

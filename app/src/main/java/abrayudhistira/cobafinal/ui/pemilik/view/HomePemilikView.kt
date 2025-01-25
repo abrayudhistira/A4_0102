@@ -93,6 +93,7 @@ fun HomePemilikView(
                     IconButton(onClick ={navController.popBackStack() }) {
                         Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
                     }
+                    Spacer(modifier = Modifier.padding(5.dp))
                     IconButton(onClick ={viewModel.getPemilik() }) {
                         Icon(imageVector = Icons.Default.Refresh, contentDescription = "Refresh")
                     }

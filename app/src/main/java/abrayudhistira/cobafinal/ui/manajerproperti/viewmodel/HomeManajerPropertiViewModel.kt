@@ -6,6 +6,7 @@ import abrayudhistira.cobafinal.model.Properti
 import abrayudhistira.cobafinal.repository.JenisPropertyRepository
 import abrayudhistira.cobafinal.repository.ManajerPropertyRepository
 import abrayudhistira.cobafinal.repository.PropertiRepository
+import abrayudhistira.cobafinal.ui.pemilik.viewmodel.HomePemilikUiState
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -39,6 +40,18 @@ class HomeManajerPropertiViewModel(private val manajerPropertyRepository: Manaje
             } catch (e:IOException) {
                 homemanajerPropertiUiState = HomeManajerPropertiUiState.Error
             } catch (e:HttpException) {
+                homemanajerPropertiUiState = HomeManajerPropertiUiState.Error
+            }
+        }
+    }
+    fun deleteManajer(id_manajer: Int) {
+        viewModelScope.launch {
+            try {
+                manajerPropertyRepository.deleteManajerProperti(id_manajer.toString())
+                getManajerProperti()
+            } catch (e: IOException) {
+                homemanajerPropertiUiState = HomeManajerPropertiUiState.Error
+            } catch (e: HttpException) {
                 homemanajerPropertiUiState = HomeManajerPropertiUiState.Error
             }
         }

@@ -6,7 +6,10 @@ import abrayudhistira.cobafinal.ui.jenisproperti.view.DetailJenisPropertiView
 import abrayudhistira.cobafinal.ui.jenisproperti.view.HomeJenisPropertiView
 import abrayudhistira.cobafinal.ui.jenisproperti.view.InsertViewJenisProperty
 import abrayudhistira.cobafinal.ui.jenisproperti.view.UpdateJenisPropertiView
+import abrayudhistira.cobafinal.ui.manajerproperti.view.DetailManajemenPropertiView
 import abrayudhistira.cobafinal.ui.manajerproperti.view.HomeManajerPropertiView
+import abrayudhistira.cobafinal.ui.manajerproperti.view.InsertViewManajemenProperti
+import abrayudhistira.cobafinal.ui.manajerproperti.view.UpdateManajemenPropertiView
 import abrayudhistira.cobafinal.ui.pemilik.view.DetailPemilikView
 import abrayudhistira.cobafinal.ui.pemilik.view.HomePemilikView
 import abrayudhistira.cobafinal.ui.pemilik.view.InsertViewPemilik
@@ -183,8 +186,61 @@ fun PengelolaHalaman(
             composable(route = DestinasiHomeManajerProperty.route) {
                 HomeManajerPropertiView(
                     navController = navController,
-                    navigateToItemEntry = { navController.navigate(DestinasiHomeManajerProperty.route) }
+                    navigateToItemEntry = { navController.navigate(DestinasiEntryManajemenProperti.route) },
+                    onDetailClick = { idManajer ->
+                        navController.navigate("${DestinasiDetailManajemenProperti.route}/$idManajer")
+                    }
                 )
+            }
+            composable(route = DestinasiEntryManajemenProperti.route) {
+                InsertViewManajemenProperti(navigateBack = {
+                    navController.navigate(DestinasiHomeManajerProperty.route) {
+                        popUpTo(DestinasiHomeManajerProperty.route) {
+                            inclusive = true
+                        }
+                    }
+                })
+            }
+            composable(
+                route = DestinasiDetailManajemenProperti.routewithArgument,
+                arguments = listOf(
+                    navArgument(DestinasiDetailManajemenProperti.iddManajerArg) {
+                        type = NavType.IntType
+                    }
+                )
+            ) { backStackEntry ->
+                val idManajer = backStackEntry.arguments?.getInt(DestinasiDetailManajemenProperti.iddManajerArg)
+                println("DetailPemilikView called with ID: $idManajer")
+                idManajer?.let { id ->
+                    DetailManajemenPropertiView(
+                        navigateBack = {
+                            navController.navigate(DestinasiHomeManajerProperty.route) {
+                                popUpTo(DestinasiHomeManajerProperty.route) {
+                                    inclusive = true
+                                }
+                            }
+                        },
+                        navigateToEdit = {
+                            navController.navigate("${DestinasiUpdateManajemenProperti.route}/$idManajer")
+                        }
+                    )
+                }
+            }
+            composable(
+                route = DestinasiUpdateManajemenProperti.routewithArgument,
+                arguments = listOf(
+                    navArgument(DestinasiUpdateManajemenProperti.idManajerArg) {
+                        type = NavType.IntType
+                    }
+                )
+            ) { backStackEntry ->
+                val idManajer = backStackEntry.arguments?.getInt(DestinasiUpdateManajemenProperti.idManajerArg)
+                idManajer?.let { id ->
+                    UpdateManajemenPropertiView(
+                        onBack = { navController.popBackStack() },
+                        onNavigate = { navController.popBackStack() }
+                    )
+                }
             }
         }
     }
