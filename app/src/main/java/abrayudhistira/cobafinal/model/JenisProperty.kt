@@ -5,8 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class JenisProperti(
-    @SerialName("id_jenis")
-    val idJenis: Int,
+    val id_jenis: Int,
     val nama_jenis: String,
     val deskripsi_jenis: String?
 )

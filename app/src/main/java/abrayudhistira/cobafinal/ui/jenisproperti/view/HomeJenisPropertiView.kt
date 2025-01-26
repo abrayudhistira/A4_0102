@@ -101,7 +101,7 @@ fun HomeJenisPropertiView(
             modifier = Modifier.padding(innerPadding),
             onDetailClick = onDetailClick,
             onDeleteClick = {
-                viewModel.deleteJenisProperty(it.idJenis)
+                viewModel.deleteJenisProperty(it.id_jenis)
                 viewModel.getJenisProperti()
             }
         )
@@ -130,7 +130,7 @@ fun JenisPropertyStatus(
                     jenisProperti = homeJenisPropertiUiState.jenisProperti,
                     modifier = modifier.fillMaxWidth(),
                     onDetailClick = {
-                        onDetailClick(it.idJenis.toString())
+                        onDetailClick(it.id_jenis.toString())
                     },
                     onDeleteClick={
                         onDeleteClick(it)

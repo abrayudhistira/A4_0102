@@ -13,6 +13,8 @@ import abrayudhistira.cobafinal.ui.pemilik.viewmodel.DetailPemilikViewModel
 import abrayudhistira.cobafinal.ui.pemilik.viewmodel.HomePemilikViewModel
 import abrayudhistira.cobafinal.ui.pemilik.viewmodel.InsertPemilikViewModel
 import abrayudhistira.cobafinal.ui.pemilik.viewmodel.UpdatePemilikViewModel
+import abrayudhistira.cobafinal.ui.properti.viewmodel.InsertPropertiViewModel
+import abrayudhistira.cobafinal.ui.property.viewmodel.DetailPropertyViewModel
 import abrayudhistira.cobafinal.ui.property.viewmodel.HomePropertyViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.createSavedStateHandle
@@ -25,6 +27,24 @@ object PenyediaViewModel {
         initializer {
             HomePropertyViewModel(
                 ManajemenPropertyApplications().container.propertyRepository)
+        }
+        initializer {
+            DetailPropertyViewModel(
+                createSavedStateHandle(),
+                ManajemenPropertyApplications().container.propertyRepository,
+                ManajemenPropertyApplications().container.jenisPropertyRepository,
+                ManajemenPropertyApplications().container.pemilikRepository,
+                ManajemenPropertyApplications().container.manajerPropertyRepository
+                )
+        }
+        initializer {
+            InsertPropertiViewModel(
+                createSavedStateHandle(),
+                ManajemenPropertyApplications().container.propertyRepository,
+                ManajemenPropertyApplications().container.jenisPropertyRepository,
+                ManajemenPropertyApplications().container.pemilikRepository,
+                ManajemenPropertyApplications().container.manajerPropertyRepository
+            )
         }
         initializer {
             HomeJenisPropertiViewModel(

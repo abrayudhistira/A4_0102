@@ -14,6 +14,16 @@ object DestinasiHomeProperty : DestinasiNavigasi {
     override val route = "home_property"
     override val titleRes = "Home Property"
 }
+object DestinasiEntryProperti : DestinasiNavigasi {
+    override val route = "entry_properti"
+    override val titleRes = "Entry Properti"
+}
+object DestinasiDetailProperti : DestinasiNavigasi {
+    override val route = "detail_properti"
+    override val titleRes = "Detail Properti"
+    const val idPropertiArg = "id_properti"
+    val routeWithArgs = "$route/{$idPropertiArg}"
+}
 
 object DestinasiHomeJenisProperty : DestinasiNavigasi {
     override val route = "home_jenis_property"
@@ -73,6 +83,6 @@ object DestinasiUpdateManajemenProperti : DestinasiNavigasi {
 object DestinasiDetailManajemenProperti : DestinasiNavigasi {
     override val route = "detail_manajemen_properti"
     override val titleRes = "Detail Manajemen Properti"
-    const val iddManajerArg = "idManajer"
-    val routewithArgument = "$route/{$iddManajerArg}"
+    const val idManajerArg = "idManajer"
+    val routewithArgument = "$route/{$idManajerArg}"
 }

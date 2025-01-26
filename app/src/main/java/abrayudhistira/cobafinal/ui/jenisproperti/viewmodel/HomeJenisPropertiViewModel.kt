@@ -57,10 +57,10 @@ class HomeJenisPropertiViewModel(private val jenisPropertyRepository: JenisPrope
 //            }
 //        }
 //    }
-    fun deleteJenisProperty(idJenis: Int) {
+    fun deleteJenisProperty(id_jenis: Int) {
         viewModelScope.launch {
             try {
-                jenisPropertyRepository.deleteJenisProperti(idJenis.toString())
+                jenisPropertyRepository.deleteJenisProperti(id_jenis.toString())
                 getJenisProperti()
             } catch (e: IOException) {
                 homeJenisPropertiUiState = HomeJenisPropertiUiState.Error

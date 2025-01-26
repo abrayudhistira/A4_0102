@@ -14,9 +14,10 @@ data class Properti(
     val Harga: String,
     @SerialName("status_properti")
     val statusProperti: String,
-    val nama_jenis: String,
-    val nama_pemilik: String,
-    val nama_manajer: String,
+    val id_jenis: Int,
+    @SerialName("id_pemilik")
+    val idPemilik: Int,
+    val id_manajer: Int,
 )
 
 //@Serializable

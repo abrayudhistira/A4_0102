@@ -25,7 +25,7 @@ interface AppContainer {
 }
 
 class ManajemenPropertyContainer: AppContainer {
-    private val baseUrl = "http://192.168.100.53:3000/api/"
+    private val baseUrl = "http://192.168.183.142:3000/api/"
     private val json = Json { ignoreUnknownKeys = true }
 
     // Buat HttpLoggingInterceptor

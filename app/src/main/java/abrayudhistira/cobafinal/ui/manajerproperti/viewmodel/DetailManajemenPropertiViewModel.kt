@@ -18,7 +18,7 @@ class DetailManajemenPropertiViewModel(
     savedStateHandle: SavedStateHandle,
     private val manajerPropertyRepository: ManajerPropertyRepository
 ) : ViewModel() {
-    private val id_manajer: Int = checkNotNull(savedStateHandle[DestinasiDetailManajemenProperti.iddManajerArg])
+    private val idManajer: Int = checkNotNull(savedStateHandle[DestinasiDetailManajemenProperti.idManajerArg])
 
     var detailManajemenPropertiUiState: DetailManajemenPropertiUiState by mutableStateOf(DetailManajemenPropertiUiState())
         private set
@@ -31,7 +31,7 @@ class DetailManajemenPropertiViewModel(
         viewModelScope.launch {
             detailManajemenPropertiUiState = DetailManajemenPropertiUiState(isLoading = true)
             try {
-                val result = manajerPropertyRepository.getbyidManajerProperti(id_manajer.toString())
+                val result = manajerPropertyRepository.getbyidManajerProperti(idManajer.toString())
                 detailManajemenPropertiUiState = DetailManajemenPropertiUiState(
                     detailManajemenPropertiUiEvent = result.toDetailManajemenPropertiUiEvent(),
                     isLoading = false

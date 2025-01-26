@@ -46,21 +46,21 @@ data class JenisPropertiUiState1(
 
 // Define the event class representing a category
 data class JenisPropertiUiEvent(
-    val idJenis: Int = 0,
+    val id_jenis: Int = 0,
     val nama_jenis: String = "",
     val deskripsi_jenis: String? = ""
 )
 
 // Extension function to convert KategoriUiEvent to Kategori (Model class)
 fun JenisPropertiUiEvent.toJenisProperti(): JenisProperti = JenisProperti(
-    idJenis = idJenis,
+    id_jenis = id_jenis,
     nama_jenis = nama_jenis,
     deskripsi_jenis = deskripsi_jenis
 )
 
 // Extension function to convert Kategori model to KategoriUiEvent
 fun JenisProperti.toUiStateJenisProp(): JenisPropertiUiEvent = JenisPropertiUiEvent(
-    idJenis = idJenis,
+    id_jenis = id_jenis,
     nama_jenis = nama_jenis,
     deskripsi_jenis = deskripsi_jenis
 )

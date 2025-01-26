@@ -1,5 +1,9 @@
 package abrayudhistira.cobafinal.service
 
+import abrayudhistira.cobafinal.model.ApiResponseSingle
+import abrayudhistira.cobafinal.model.JenisProperti
+import abrayudhistira.cobafinal.model.ManajerProperti
+import abrayudhistira.cobafinal.model.Pemilik
 import abrayudhistira.cobafinal.model.Properti
 import retrofit2.Response
 import retrofit2.http.Body
@@ -20,11 +24,20 @@ interface PropertyService {
     @GET("properti/")
     suspend fun getProperti(): List<Properti>//GET LIST PROPERTI
 
+    @GET("properti/jenisProperti")
+    suspend fun getJenisProperti(): List<String>
+
+    @GET("properti/pemilik")
+    suspend fun getPemilik(): List<String>
+
+    @GET("properti/manajer")
+    suspend fun getManajer(): List<String>
+
     @GET("properti/{id_properti}")
-    suspend fun getbyidProperti(@Path("id_properti")id_properti: String): Properti //GET BY ID
+    suspend fun getbyidProperti(@Path("id_properti") id_properti: String): Response<ApiResponseSingle<Properti>> // Tentukan type argument Penayangan
 
     @POST("properti/add")
-    suspend fun insertProperti(@Body properti: Properti) // INSERT PROPERTI
+    suspend fun insertProperti(@Body properti: Properti) : Response<Unit> // INSERT PROPERTI
 
     @PUT("properti/edit/{id_properti}")
     suspend fun editProperti(@Path("id_properti")id_properti: String, @Body properti: Properti) // EDIT PROPERTI

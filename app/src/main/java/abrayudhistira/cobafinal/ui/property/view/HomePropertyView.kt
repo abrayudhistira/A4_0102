@@ -1,6 +1,9 @@
 package abrayudhistira.cobafinal.ui.property.view
 
 import abrayudhistira.cobafinal.R
+import abrayudhistira.cobafinal.model.JenisProperti
+import abrayudhistira.cobafinal.model.ManajerProperti
+import abrayudhistira.cobafinal.model.Pemilik
 import abrayudhistira.cobafinal.model.Properti
 import abrayudhistira.cobafinal.ui.PenyediaViewModel
 import abrayudhistira.cobafinal.ui.property.viewmodel.HomePropertyViewModel
@@ -244,26 +247,26 @@ fun PropertyCard(
                     color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.padding(bottom = 4.dp)
                 )
-                Divider()
-                Text(
-                    text = "Jenis Properti: ${properti.nama_jenis}",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier.padding(bottom = 4.dp)
-                )
-                Divider()
-                Text(
-                    text = "Pemilik: ${properti.nama_pemilik}",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier.padding(bottom = 4.dp)
-                )
-                Divider()
-                Text(
-                    text = "Manajer: ${properti.nama_manajer}",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
+//                Divider()
+//                Text(
+//                    text = "Jenis Properti: ${jenisProperti.nama_jenis}",
+//                    style = MaterialTheme.typography.bodyMedium,
+//                    color = MaterialTheme.colorScheme.onSurface,
+//                    modifier = Modifier.padding(bottom = 4.dp)
+//                )
+//                Divider()
+//                Text(
+//                    text = "Pemilik: ${pemilik.nama_pemilik}",
+//                    style = MaterialTheme.typography.bodyMedium,
+//                    color = MaterialTheme.colorScheme.onSurface,
+//                    modifier = Modifier.padding(bottom = 4.dp)
+//                )
+//                Divider()
+//                Text(
+//                    text = "Manajer: ${manajerProperti.nama_manajer}",
+//                    style = MaterialTheme.typography.bodyMedium,
+//                    color = MaterialTheme.colorScheme.onSurface
+//                )
             }
         }
     }

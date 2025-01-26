@@ -60,21 +60,21 @@ data class DetailJenisUiState(
 }
 
 data class DetailJenisUiEvent(
-    val idJenis: Int = 0,
+    val id_jenis: Int = 0,
     val nama_jenis: String = "",
     val deskripsi_jenis: String? = ""
 )
 
 fun JenisProperti.toDetailJenisUiEvent(): DetailJenisUiEvent{
     return DetailJenisUiEvent(
-        idJenis = idJenis,
+        id_jenis = id_jenis,
         nama_jenis = nama_jenis,
         deskripsi_jenis = deskripsi_jenis,
     )
 }
 fun DetailJenisUiEvent.toJenisProperti(): JenisProperti {
     return JenisProperti(
-        idJenis = idJenis,
+        id_jenis = id_jenis,
         nama_jenis = nama_jenis,
         deskripsi_jenis = deskripsi_jenis,
     )

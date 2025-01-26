@@ -14,7 +14,9 @@ import abrayudhistira.cobafinal.ui.pemilik.view.DetailPemilikView
 import abrayudhistira.cobafinal.ui.pemilik.view.HomePemilikView
 import abrayudhistira.cobafinal.ui.pemilik.view.InsertViewPemilik
 import abrayudhistira.cobafinal.ui.pemilik.view.UpdatePemilikView
+import abrayudhistira.cobafinal.ui.property.view.DetailPropertyView
 import abrayudhistira.cobafinal.ui.property.view.HomePropertyView
+import abrayudhistira.cobafinal.ui.property.view.InsertViewProperti
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -61,8 +63,45 @@ fun PengelolaHalaman(
             composable(route = DestinasiHomeProperty.route) {
                 HomePropertyView(
                     navController = navController,
-                    navigateToItemEntry = { navController.navigate(DestinasiHomeProperty.route) }
+                    navigateToItemEntry = { navController.navigate(DestinasiEntryProperti.route) },
+                    onDetailClick = { idProperti ->
+                        navController.navigate("${DestinasiDetailProperti.route}/$idProperti")
+                    }
                 )
+            }
+            composable(route = DestinasiEntryProperti.route) {
+                InsertViewProperti(navigateBack = {
+                    navController.navigate(DestinasiHomeProperty.route) {
+                        popUpTo(DestinasiHomeProperty.route) {
+                            inclusive = true
+                        }
+                    }
+                })
+            }
+            composable(
+                route = DestinasiDetailProperti.routeWithArgs,
+                arguments = listOf(
+                    navArgument(DestinasiDetailProperti.idPropertiArg) {
+                        type = NavType.IntType
+                    }
+                )
+            ) { backStackEntry ->
+                val idProperti = backStackEntry.arguments?.getInt(DestinasiDetailProperti.idPropertiArg)
+                println("DestinasiDetailProperti called with ID: $idProperti")
+                idProperti?.let { id ->
+                    DetailPropertyView(
+                        navigateBack = {
+                            navController.navigate(DestinasiHomeProperty.route) {
+                                popUpTo(DestinasiHomeProperty.route) {
+                                    inclusive = true
+                                }
+                            }
+                        },
+                        navigateToEdit = {
+                            navController.navigate("${DestinasiHomeProperty.route}/$idProperti")
+                        }
+                    )
+                }
             }
             composable(route = DestinasiHomeJenisProperty.route) {
                 HomeJenisPropertiView(
@@ -203,12 +242,12 @@ fun PengelolaHalaman(
             composable(
                 route = DestinasiDetailManajemenProperti.routewithArgument,
                 arguments = listOf(
-                    navArgument(DestinasiDetailManajemenProperti.iddManajerArg) {
+                    navArgument(DestinasiDetailManajemenProperti.idManajerArg) {
                         type = NavType.IntType
                     }
                 )
             ) { backStackEntry ->
-                val idManajer = backStackEntry.arguments?.getInt(DestinasiDetailManajemenProperti.iddManajerArg)
+                val idManajer = backStackEntry.arguments?.getInt(DestinasiDetailManajemenProperti.idManajerArg)
                 println("DetailPemilikView called with ID: $idManajer")
                 idManajer?.let { id ->
                     DetailManajemenPropertiView(

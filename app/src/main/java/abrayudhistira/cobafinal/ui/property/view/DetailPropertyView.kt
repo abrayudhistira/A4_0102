@@ -1,17 +1,15 @@
-package abrayudhistira.cobafinal.ui.jenisproperti.view
+package abrayudhistira.cobafinal.ui.property.view
 
 import abrayudhistira.cobafinal.model.JenisProperti
+import abrayudhistira.cobafinal.model.ManajerProperti
 import abrayudhistira.cobafinal.model.Pemilik
+import abrayudhistira.cobafinal.model.Properti
 import abrayudhistira.cobafinal.ui.PenyediaViewModel
-import abrayudhistira.cobafinal.ui.jenisproperti.viewmodel.DetailJenisPropertiViewModel
-import abrayudhistira.cobafinal.ui.jenisproperti.viewmodel.DetailJenisUiState
-import abrayudhistira.cobafinal.ui.jenisproperti.viewmodel.toJenisProperti
 import abrayudhistira.cobafinal.ui.navigasi.CostumeTopAppBar
-import abrayudhistira.cobafinal.ui.navigasi.DestinasiDetailPemilik
 import abrayudhistira.cobafinal.ui.navigasi.DestinasiNavigasi
-import abrayudhistira.cobafinal.ui.pemilik.viewmodel.DetailPemilikUiState
-import abrayudhistira.cobafinal.ui.pemilik.viewmodel.DetailPemilikViewModel
-import abrayudhistira.cobafinal.ui.pemilik.viewmodel.toPemilik
+import abrayudhistira.cobafinal.ui.property.viewmodel.DetailPropertyUiState
+import abrayudhistira.cobafinal.ui.property.viewmodel.DetailPropertyViewModel
+import abrayudhistira.cobafinal.ui.property.viewmodel.toProperti
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -41,27 +39,28 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
-object DestinasiDetailJenisProperti : DestinasiNavigasi {
-    override val route = "detail_jenis_properti"
-    override val titleRes = "Detail Jenis Property"
-    const val idJenisArg = "idJenis"
-    val routewithArgument = "$route/{$idJenisArg}"
+object DestinasiDetailProperti : DestinasiNavigasi {
+    override val route = "detail_properti"
+    override val titleRes = "Detail Properti"
+    const val idPropertiArg = "idProperti"
+    val routeWithArgument = "$route/{$idPropertiArg}"
 }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailJenisPropertiView(
+fun DetailPropertyView(
     navigateBack: () -> Unit,
     navigateToEdit: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: DetailJenisPropertiViewModel = viewModel(factory = PenyediaViewModel.Factory)
+    viewModel: DetailPropertyViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
-    println("DetailJenisPropertiView: ViewModel initialized")
+    println("DetailPropertyView: ViewModel initialized")
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Scaffold(
-        modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier = modifier.nestedScroll(connection = scrollBehavior.nestedScrollConnection),
         topBar = {
             CostumeTopAppBar(
-                title = DestinasiDetailJenisProperti.titleRes,
+                title = DestinasiDetailProperti.titleRes,
                 canNavigateBack = true,
                 scrollBehavior = scrollBehavior,
                 navigateUp = navigateBack
@@ -75,26 +74,26 @@ fun DetailJenisPropertiView(
             ) {
                 Icon(
                     imageVector = Icons.Default.Edit,
-                    contentDescription = "Edit Pemilik"
+                    contentDescription = "Edit Properti"
                 )
             }
         }
     ) { innerPadding ->
-        BodyDetailJenisProperti(
-            detailJenisUiState = viewModel.detailJenisUiState,
+        BodyDetailProperty(
+            detailPropertyUiState = viewModel.detailPropertyUiState,
             modifier = Modifier.padding(innerPadding)
         )
     }
 }
 
 @Composable
-fun BodyDetailJenisProperti(
-    detailJenisUiState: DetailJenisUiState,
+fun BodyDetailProperty(
+    detailPropertyUiState: DetailPropertyUiState,
     modifier: Modifier = Modifier
 ) {
-    println("BodyDetailPemilik: UI State - $detailJenisUiState")
+    println("BodyDetailProperty: UI State - $detailPropertyUiState")
     when {
-        detailJenisUiState.isLoading -> {
+        detailPropertyUiState.isLoading -> {
             Box(
                 modifier = modifier.fillMaxWidth(),
                 contentAlignment = Alignment.Center
@@ -102,28 +101,37 @@ fun BodyDetailJenisProperti(
                 CircularProgressIndicator()
             }
         }
-        detailJenisUiState.isError -> {
-            println("BodyDetailPemilik: Error - ${detailJenisUiState.errorMessage}")
+        detailPropertyUiState.isError -> {
+            println("BodyDetailProperty: Error - ${detailPropertyUiState.errorMessage}")
             Box(
                 modifier = modifier.fillMaxWidth(),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = detailJenisUiState.errorMessage,
+                    text = detailPropertyUiState.errorMessage,
                     color = Color.Red
                 )
             }
         }
-        detailJenisUiState.isUiEventNotEmpty -> {
-            println("BodyDetailPemilik: Data loaded successfully")
+        detailPropertyUiState.isUiEventNotEmpty -> {
+            println("BodyDetailProperty: Data loaded successfully")
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp)
                     .verticalScroll(rememberScrollState())
             ) {
-                ItemDetailJenisProperti(
-                    jenisProperti = detailJenisUiState.detailJenisUiEvent.toJenisProperti(),
+                // Ambil data jenisProperti, pemilik, dan manajerProperti dari state
+                val jenisProperti = detailPropertyUiState.jenisProperti
+                val pemilik = detailPropertyUiState.pemilik
+                val manajerProperti = detailPropertyUiState.manajerProperti
+
+                // Panggil ItemDetailProperty dengan semua parameter yang diperlukan
+                ItemDetailProperty(
+                    properti = detailPropertyUiState.detailPropertyUiEvent.toProperti(),
+                    jenisProperti = detailPropertyUiState.jenisProperti,
+                    pemilik = detailPropertyUiState.pemilik,
+                    manajerProperti = detailPropertyUiState.manajerProperti,
                     modifier = modifier
                 )
             }
@@ -132,11 +140,14 @@ fun BodyDetailJenisProperti(
 }
 
 @Composable
-fun ItemDetailJenisProperti(
+fun ItemDetailProperty(
     modifier: Modifier = Modifier,
-    jenisProperti: JenisProperti
+    properti: Properti,
+    jenisProperti: JenisProperti,
+    pemilik: Pemilik,
+    manajerProperti: ManajerProperti
 ) {
-    println("ItemDetailJenisProperti: Displaying data for Jenis Pemilik - $jenisProperti")
+    println("ItemDetailProperty: Displaying data for properti - $properti")
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -150,27 +161,34 @@ fun ItemDetailJenisProperti(
             modifier = Modifier
                 .padding(16.dp)
         ) {
-            ComponentDetailJenisProperti(judul = "ID Jenis Property", isinya = jenisProperti.id_jenis.toString())
+            ComponentDetailProperty(judul = "ID Properti", isinya = properti.idProperti.toString())
             Spacer(modifier = Modifier.padding(4.dp))
-            ComponentDetailJenisProperti(judul = "Nama Jenis Property", isinya = jenisProperti.nama_jenis)
+            ComponentDetailProperty(judul = "Nama Properti", isinya = properti.nama_properti)
             Spacer(modifier = Modifier.padding(4.dp))
-            jenisProperti.deskripsi_jenis?.let {
-                ComponentDetailJenisProperti(
-                    judul = "Deskripsi Jenis",
-                    isinya = it
-                )
-            }
+            ComponentDetailProperty(judul = "Deskripsi", isinya = properti.deskripsi_properti)
+            Spacer(modifier = Modifier.padding(4.dp))
+            ComponentDetailProperty(judul = "Lokasi", isinya = properti.lokasi)
+            Spacer(modifier = Modifier.padding(4.dp))
+            ComponentDetailProperty(judul = "Harga", isinya = properti.Harga)
+            Spacer(modifier = Modifier.padding(4.dp))
+            ComponentDetailProperty(judul = "Status", isinya = properti.statusProperti)
+            Spacer(modifier = Modifier.padding(4.dp))
+            ComponentDetailProperty(judul = "Jenis Properti", isinya = jenisProperti.nama_jenis)
+            Spacer(modifier = Modifier.padding(4.dp))
+            ComponentDetailProperty(judul = "Pemilik", isinya = pemilik.nama_pemilik)
+            Spacer(modifier = Modifier.padding(4.dp))
+            ComponentDetailProperty(judul = "Manajer", isinya = manajerProperti.nama_manajer)
         }
     }
 }
 
 @Composable
-fun ComponentDetailJenisProperti(
+fun ComponentDetailProperty(
     modifier: Modifier = Modifier,
     judul: String,
     isinya: String
 ) {
-    println("ComponentDetailJenisProperti: Displaying $judul - $isinya")
+    println("ComponentDetailProperty: Displaying $judul - $isinya")
     Column(
         modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.Start
