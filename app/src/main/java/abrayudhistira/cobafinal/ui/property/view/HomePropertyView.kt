@@ -105,7 +105,7 @@ fun HomePropertyView(
             modifier = Modifier.padding(innerPadding),
             onDetailClick = onDetailClick,
             onDeleteClick = {
-                //viewModel.delete
+                viewModel.deleteProperti(it.idProperti.toString())
                 viewModel.getProperti()
             }
         )

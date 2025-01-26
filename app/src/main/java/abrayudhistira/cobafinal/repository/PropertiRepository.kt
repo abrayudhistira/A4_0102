@@ -19,7 +19,7 @@ import java.io.IOException
 
 interface PropertiRepository {
     suspend fun getProperty() : List<Properti>
-    suspend fun getbyidProperti(id_properti : String): Response<ApiResponseSingle<Properti>>
+    suspend fun getbyidProperti(id_properti : String): Properti
     suspend fun insertProperti(properti: Properti)
     suspend fun editProperti(id_properti: String,properti: Properti)
     suspend fun deleteProperti(id_properti: String)
@@ -30,17 +30,17 @@ class NetworkPropertiRepository(
 
     override suspend fun getProperty(): List<Properti> = propertyService.getProperti()
 
-    override suspend fun getbyidProperti(id_properti: String): Response<ApiResponseSingle<Properti>> {
-        val response = propertyService.getbyidProperti(id_properti)
-        if (response.isSuccessful) {
-            val apiResponse = response.body()
-            if (apiResponse != null && apiResponse.status) {
-                return response // Kembalikan response, bukan apiResponse.data
+    override suspend fun getbyidProperti(id_properti: String): Properti {
+        try {
+            // Gunakan await() untuk menunggu hasil dari Call
+            val response = propertyService.getbyidProperti(id_properti)
+            if (response != null) {
+                return response // Kembalikan objek Properti langsung
             } else {
-                throw IOException("Data penayangan tidak ditemukan")
+                throw IOException("Data properti tidak ditemukan")
             }
-        } else {
-            throw IOException("Gagal mengambil data: ${response.message()}")
+        } catch (e: Exception) {
+            throw IOException("Gagal mengambil data: ${e.message}")
         }
     }
 
@@ -76,17 +76,4 @@ class NetworkPropertiRepository(
             throw e
         }
     }
-
-//    override suspend fun getJenisProperti(): List<String> {
-//        return propertyService.getJenisProperti()
-//    }
-//
-//    override suspend fun getPemilik(): List<String> {
-//        return propertyService.getPemilik()
-//    }
-//
-//    override suspend fun getManajer(): List<String> {
-//        return propertyService.getManajer()
-//    }
-
 }

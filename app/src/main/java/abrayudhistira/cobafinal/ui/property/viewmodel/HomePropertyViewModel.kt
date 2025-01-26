@@ -39,19 +39,17 @@ class HomePropertyViewModel(private val propertiRepository : PropertiRepository 
             }
         }
     }
-//    fun getProperti() {
-//        viewModelScope.launch {
-//            homeUiState = HomeUiState.Loading
-//            Log.d("HomePropertyViewModel", "Memulai pengambilan data...")
-//
-//            homeUiState = try {
-//                val data = propertiRepository.getProperty()
-//                Log.d("HomePropertyViewModel", "Data berhasil diambil: ${data.size} properti")
-//                HomeUiState.Success(data)
-//            } catch (e: Exception) {
-//                Log.e("HomePropertyViewModel", "Error saat mengambil data: ${e.message}", e)
-//                HomeUiState.Error
-//            }
-//        }
-//    }
+    fun deleteProperti(idProperti: String) {
+        viewModelScope.launch {
+            try {
+                propertiRepository.deleteProperti(idProperti)
+                getProperti()
+            } catch (e: IOException) {
+                homeUiState = HomeUiState.Error
+            } catch (e: HttpException) {
+                homeUiState = HomeUiState.Error
+            }
+        }
+    }
+
 }

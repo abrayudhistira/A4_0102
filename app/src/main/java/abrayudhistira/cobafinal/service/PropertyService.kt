@@ -34,7 +34,7 @@ interface PropertyService {
     suspend fun getManajer(): List<String>
 
     @GET("properti/{id_properti}")
-    suspend fun getbyidProperti(@Path("id_properti") id_properti: String): Response<ApiResponseSingle<Properti>> // Tentukan type argument Penayangan
+    suspend fun getbyidProperti(@Path("id_properti") id_properti: String): Properti // Tentukan type argument Penayangan
 
     @POST("properti/add")
     suspend fun insertProperti(@Body properti: Properti) : Response<Unit> // INSERT PROPERTI

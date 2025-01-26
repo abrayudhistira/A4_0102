@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("org.jetbrains.kotlin.plugin.serialization") version "1.9.10"
+
 }
 
 android {
@@ -85,4 +86,9 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.7.3")
     implementation ("com.squareup.okhttp3:okhttp:4.9.3")
     implementation ("com.squareup.okhttp3:logging-interceptor:4.9.3")
+    implementation ("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1")
+    implementation ("androidx.concurrent:concurrent-futures-ktx:1.1.0")
 }

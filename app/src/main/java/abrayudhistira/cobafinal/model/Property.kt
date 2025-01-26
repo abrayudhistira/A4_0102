@@ -19,10 +19,3 @@ data class Properti(
     val idPemilik: Int,
     val id_manajer: Int,
 )
-
-//@Serializable
-//enum class StatusProperti {
-//    Tersedia,
-//    Tersewa,
-//    Dijual
-//}

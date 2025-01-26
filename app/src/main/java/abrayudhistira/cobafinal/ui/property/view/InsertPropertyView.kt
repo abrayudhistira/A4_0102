@@ -161,7 +161,8 @@ fun FormInputProperti(
             items = StatusProperti.values().toList(),
             selectedItem = propertiUiEvent.statusProperti,
             onItemSelected = { status -> onValueChange(propertiUiEvent.copy(statusProperti = status)) },
-            label = "Status Properti"
+            label = "Status Properti",
+            itemToString = { it.toString() }
         )
 
         // Dropdown untuk jenis properti
@@ -169,7 +170,8 @@ fun FormInputProperti(
             items = jenisPropertiList,
             selectedItem = jenisPropertiList.find { it.id_jenis == propertiUiEvent.idJenis },
             onItemSelected = { jenis -> onValueChange(propertiUiEvent.copy(idJenis = jenis.id_jenis)) },
-            label = "Jenis Properti"
+            label = "Jenis Properti",
+            itemToString = { it.nama_jenis } // Hanya tampilkan nama_jenis
         )
 
         // Dropdown untuk pemilik
@@ -177,7 +179,8 @@ fun FormInputProperti(
             items = pemilikList,
             selectedItem = pemilikList.find { it.idPemilik == propertiUiEvent.idPemilik },
             onItemSelected = { pemilik -> onValueChange(propertiUiEvent.copy(idPemilik = pemilik.idPemilik)) },
-            label = "Pemilik"
+            label = "Pemilik",
+            itemToString = { it.nama_pemilik } // Hanya tampilkan nama_pemilik
         )
 
         // Dropdown untuk manajer
@@ -185,7 +188,8 @@ fun FormInputProperti(
             items = manajerList,
             selectedItem = manajerList.find { it.id_manajer == propertiUiEvent.idManajer },
             onItemSelected = { manajer -> onValueChange(propertiUiEvent.copy(idManajer = manajer.id_manajer)) },
-            label = "Manajer"
+            label = "Manajer",
+            itemToString = { it.nama_manajer } // Hanya tampilkan nama_manajer
         )
     }
 }
@@ -197,7 +201,8 @@ fun <T> DropdownMenu(
     selectedItem: T?,
     onItemSelected: (T) -> Unit,
     label: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    itemToString: (T) -> String = { it.toString() }
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -207,7 +212,7 @@ fun <T> DropdownMenu(
         modifier = modifier.fillMaxWidth()
     ) {
         OutlinedTextField(
-            value = selectedItem?.toString() ?: "",
+            value = selectedItem?.let { itemToString(it) } ?: "",
             onValueChange = {},
             label = { Text(label) },
             modifier = Modifier
@@ -225,7 +230,7 @@ fun <T> DropdownMenu(
         ) {
             items.forEach { item ->
                 DropdownMenuItem(
-                    text = { Text(item.toString()) },
+                    text = { Text(itemToString(item)) },
                     onClick = {
                         onItemSelected(item)
                         expanded = false

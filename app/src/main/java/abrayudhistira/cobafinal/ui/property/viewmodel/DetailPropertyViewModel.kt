@@ -41,10 +41,7 @@ class DetailPropertyViewModel(
             detailPropertyUiState = DetailPropertyUiState(isLoading = true)
             try {
                 // Ambil data properti
-                val jsonResponse = propertiRepository.getbyidProperti(id_properti.toString())
-                println("JSON Response: $jsonResponse") // Log the JSON response
-                val properti = Json.decodeFromString<Properti>(jsonResponse.toString())
-
+                val properti = propertiRepository.getbyidProperti(id_properti.toString())
                 // Ambil data jenisProperti, pemilik, dan manajerProperti
                 val jenisProperti = jenisPropertyRepository.getbyidJenisProperti(properti.id_jenis.toString())
                 val pemilik = pemilikRepository.getbyidPemilik(properti.idPemilik.toString())
