@@ -14,9 +14,11 @@ import abrayudhistira.cobafinal.ui.pemilik.view.DetailPemilikView
 import abrayudhistira.cobafinal.ui.pemilik.view.HomePemilikView
 import abrayudhistira.cobafinal.ui.pemilik.view.InsertViewPemilik
 import abrayudhistira.cobafinal.ui.pemilik.view.UpdatePemilikView
+import abrayudhistira.cobafinal.ui.property.view.DestinasiUpdateProperti
 import abrayudhistira.cobafinal.ui.property.view.DetailPropertyView
 import abrayudhistira.cobafinal.ui.property.view.HomePropertyView
 import abrayudhistira.cobafinal.ui.property.view.InsertViewProperti
+import abrayudhistira.cobafinal.ui.property.view.UpdatePropertiView
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -98,8 +100,24 @@ fun PengelolaHalaman(
                             }
                         },
                         navigateToEdit = {
-                            navController.navigate("${DestinasiHomeProperty.route}/$idProperti")
+                            navController.navigate("${DestinasiUpdateProperti.route}/$idProperti")
                         }
+                    )
+                }
+            }
+            composable(
+                route = DestinasiUpdateProperti.routewithArgument,
+                arguments = listOf(
+                    navArgument(DestinasiUpdateProperti.idPropertiArg) {
+                        type = NavType.IntType
+                    }
+                )
+            ) { backStackEntry ->
+                val idProperti = backStackEntry.arguments?.getInt(DestinasiUpdateProperti.idPropertiArg)
+                idProperti?.let { id ->
+                    UpdatePropertiView(
+                        onBack = { navController.popBackStack() },
+                        onNavigate = { navController.popBackStack() }
                     )
                 }
             }

@@ -16,6 +16,7 @@ import abrayudhistira.cobafinal.ui.pemilik.viewmodel.UpdatePemilikViewModel
 import abrayudhistira.cobafinal.ui.properti.viewmodel.InsertPropertiViewModel
 import abrayudhistira.cobafinal.ui.property.viewmodel.DetailPropertyViewModel
 import abrayudhistira.cobafinal.ui.property.viewmodel.HomePropertyViewModel
+import abrayudhistira.cobafinal.ui.property.viewmodel.UpdatePropertiViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewmodel.CreationExtras
@@ -49,6 +50,15 @@ object PenyediaViewModel {
         initializer {
             HomeJenisPropertiViewModel(
                 ManajemenPropertyApplications().container.jenisPropertyRepository)
+        }
+        initializer {
+            UpdatePropertiViewModel(
+                createSavedStateHandle(),
+                ManajemenPropertyApplications().container.propertyRepository,
+                ManajemenPropertyApplications().container.jenisPropertyRepository,
+                ManajemenPropertyApplications().container.pemilikRepository,
+                ManajemenPropertyApplications().container.manajerPropertyRepository
+            )
         }
         initializer {
             InsertJenisPopertiViewModel(
