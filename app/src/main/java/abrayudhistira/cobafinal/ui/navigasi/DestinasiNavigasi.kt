@@ -30,7 +30,12 @@ object DestinasiUpdateProperti : DestinasiNavigasi {
     const val idPropertiArg = "idProperti"
     val routewithArgument = "$route/{$idPropertiArg}"
 }
-
+object DestinasiJenisPropertiinProperti : DestinasiNavigasi {
+    override val route = "view_propertiinproperti"
+    override val titleRes = "Jenis Properti In Properti"
+    const val idJenisPropInPropArg = "idJenisPropInPropArg"
+    val routewithArgument = "$route/{$idJenisPropInPropArg}"
+}
 object DestinasiHomeJenisProperty : DestinasiNavigasi {
     override val route = "home_jenis_property"
     override val titleRes = "Home Jenis Property"

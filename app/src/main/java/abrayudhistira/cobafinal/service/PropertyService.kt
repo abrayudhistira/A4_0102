@@ -24,15 +24,6 @@ interface PropertyService {
     @GET("properti/")
     suspend fun getProperti(): List<Properti>//GET LIST PROPERTI
 
-    @GET("properti/jenisProperti")
-    suspend fun getJenisProperti(): List<String>
-
-    @GET("properti/pemilik")
-    suspend fun getPemilik(): List<String>
-
-    @GET("properti/manajer")
-    suspend fun getManajer(): List<String>
-
     @GET("properti/{id_properti}")
     suspend fun getbyidProperti(@Path("id_properti") id_properti: String): Properti // Tentukan type argument Penayangan
 

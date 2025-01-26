@@ -10,14 +10,18 @@ import abrayudhistira.cobafinal.ui.manajerproperti.view.DetailManajemenPropertiV
 import abrayudhistira.cobafinal.ui.manajerproperti.view.HomeManajerPropertiView
 import abrayudhistira.cobafinal.ui.manajerproperti.view.InsertViewManajemenProperti
 import abrayudhistira.cobafinal.ui.manajerproperti.view.UpdateManajemenPropertiView
+import abrayudhistira.cobafinal.ui.navigasi.DestinasiJenisPropertiinProperti.idJenisPropInPropArg
 import abrayudhistira.cobafinal.ui.pemilik.view.DetailPemilikView
 import abrayudhistira.cobafinal.ui.pemilik.view.HomePemilikView
 import abrayudhistira.cobafinal.ui.pemilik.view.InsertViewPemilik
 import abrayudhistira.cobafinal.ui.pemilik.view.UpdatePemilikView
+import abrayudhistira.cobafinal.ui.property.view.DestinasiJenisPropertiinProperti
+//import abrayudhistira.cobafinal.ui.property.view.DestinasiJenisPropertiinProperti.idJenisPropInPropArg
 import abrayudhistira.cobafinal.ui.property.view.DestinasiUpdateProperti
 import abrayudhistira.cobafinal.ui.property.view.DetailPropertyView
 import abrayudhistira.cobafinal.ui.property.view.HomePropertyView
 import abrayudhistira.cobafinal.ui.property.view.InsertViewProperti
+import abrayudhistira.cobafinal.ui.property.view.JenisPropertiInPropertiView
 import abrayudhistira.cobafinal.ui.property.view.UpdatePropertiView
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -101,10 +105,30 @@ fun PengelolaHalaman(
                         },
                         navigateToEdit = {
                             navController.navigate("${DestinasiUpdateProperti.route}/$idProperti")
+                        },
+                        navigateToJenisProperti = {
+                            navController.navigate("${DestinasiJenisPropertiinProperti.route}/$idJenisPropInPropArg")
                         }
                     )
                 }
             }
+//            composable(
+//                route = DestinasiJenisPropertiinProperti.routewithArgument,
+//                arguments = listOf(
+//                    navArgument(DestinasiJenisPropertiinProperti.idPropertiArg) {
+//                        type = NavType.IntType
+//                    }
+//                )
+//            ) { backStackEntry ->
+//                val idProperti = backStackEntry.arguments?.getInt(DestinasiJenisPropertiinProperti.idPropertiArg)
+//                println("DestinasiDetailProperti called with ID: $idProperti")
+//                idProperti?.let { id ->
+//                    JenisPropertiInPropertiView(
+//                        jenisPropertiList = jenisPropertiList,
+//                        navController = navController
+//                    )
+//                }
+//            }
             composable(
                 route = DestinasiUpdateProperti.routewithArgument,
                 arguments = listOf(

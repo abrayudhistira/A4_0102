@@ -31,6 +31,8 @@ class DetailPropertyViewModel(
 
     var detailPropertyUiState: DetailPropertyUiState by mutableStateOf(DetailPropertyUiState())
         private set
+    var jenisPropertiList by mutableStateOf<List<JenisProperti>>(emptyList())
+        private set
 
     init {
         getByIdProperti()
@@ -63,6 +65,11 @@ class DetailPropertyViewModel(
                     errorMessage = e.message ?: "Unknown error occurred"
                 )
             }
+        }
+    }
+    fun fetchJenisProperti(idProperti: Int) {
+        viewModelScope.launch {
+            jenisPropertiList = listOf(jenisPropertyRepository.getbyidJenisProperti(idProperti.toString()))
         }
     }
 }

@@ -19,6 +19,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -51,6 +52,7 @@ object DestinasiDetailProperti : DestinasiNavigasi {
 fun DetailPropertyView(
     navigateBack: () -> Unit,
     navigateToEdit: () -> Unit,
+    navigateToJenisProperti: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: DetailPropertyViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
@@ -77,6 +79,17 @@ fun DetailPropertyView(
                     contentDescription = "Edit Properti"
                 )
             }
+//            // Tombol untuk melihat jenis properti
+//            FloatingActionButton(
+//                onClick = navigateToJenisProperti, // Navigasi ke halaman jenis properti
+//                shape = MaterialTheme.shapes.medium,
+//                modifier = Modifier.padding(8.dp)
+//            ) {
+//                Icon(
+//                    imageVector = Icons.Default.List,
+//                    contentDescription = "Lihat Jenis Properti"
+//                )
+//            }
         }
     ) { innerPadding ->
         BodyDetailProperty(
