@@ -210,7 +210,7 @@ fun ComponentDetailProperty(
             text = "$judul : ",
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.Gray
+            color = MaterialTheme.colorScheme.onBackground
         )
         Text(
             text = isinya,

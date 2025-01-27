@@ -70,7 +70,7 @@ fun HomeJenisPropertiView(
                         Text(
                             text = "Daftar Jenis Property",
                             style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-                            color = Color.Black
+                            color = MaterialTheme.colorScheme.onBackground
                         )
                     }
                 },

@@ -70,7 +70,7 @@ fun HomePemilikView(
                         Text(
                             text = "Daftar Pemilik",
                             style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-                            color = Color.Black
+                            color = MaterialTheme.colorScheme.onBackground
                         )
                     }
                 },

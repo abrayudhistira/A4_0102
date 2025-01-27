@@ -74,7 +74,7 @@ fun HomePropertyView(
                         Text(
                             text = "Daftar Property",
                             style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-                            color = Color.Black
+                            color = MaterialTheme.colorScheme.onBackground
                         )
                     }
                 },
