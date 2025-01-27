@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -44,13 +45,23 @@ fun HomeApp(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Silahkan pilih menu yang ingin anda kelola",
+            text = "Halo, Selamat Datang di Management Property",
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.Black,
+            color = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 8.dp)
+                .padding(bottom = 8.dp, top = 15.dp)
+                .wrapContentWidth(Alignment.CenterHorizontally)
+        )
+        Text(
+            text = "Silahkan Pilih Menu yang ingin anda kelola",
+            fontSize = 11.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onBackground,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp, top = 15.dp)
                 .wrapContentWidth(Alignment.CenterHorizontally)
         )
 
