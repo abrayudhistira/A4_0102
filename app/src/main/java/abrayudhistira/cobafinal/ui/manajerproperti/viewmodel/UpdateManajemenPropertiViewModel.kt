@@ -28,7 +28,7 @@ class UpdateManajemenPropertiViewModel(
     init {
         viewModelScope.launch {
             try {
-                val updManajem = upManajemen.getbyidManajerProperti(upManajemen.toString())
+                val updManajem = upManajemen.getbyidManajerProperti(id_manajer.toString())
                 updateUiState = ManajemenPropertiUiState1(updManajem.toUiStateManajemenProp())
             } catch (e: Exception) {
                 e.printStackTrace()

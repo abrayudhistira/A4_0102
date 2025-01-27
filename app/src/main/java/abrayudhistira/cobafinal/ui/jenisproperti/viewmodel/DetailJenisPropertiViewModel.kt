@@ -4,6 +4,7 @@ import abrayudhistira.cobafinal.model.JenisProperti
 import abrayudhistira.cobafinal.model.Pemilik
 import abrayudhistira.cobafinal.repository.JenisPropertyRepository
 import abrayudhistira.cobafinal.repository.PemilikRepository
+import abrayudhistira.cobafinal.ui.navigasi.DestinasiDetailJenisProperti
 import abrayudhistira.cobafinal.ui.navigasi.DestinasiDetailPemilik
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -17,7 +18,7 @@ class DetailJenisPropertiViewModel(
     savedStateHandle: SavedStateHandle,
     private val jenisPropertyRepository: JenisPropertyRepository
 ) : ViewModel() {
-    private val idJenisProperti: Int = checkNotNull(savedStateHandle[DestinasiDetailPemilik.idPemilikArg])
+    private val idJenisProperti: Int = checkNotNull(savedStateHandle[DestinasiDetailJenisProperti.idJenisArg])
 
     var detailJenisUiState: DetailJenisUiState by mutableStateOf(DetailJenisUiState())
         private set

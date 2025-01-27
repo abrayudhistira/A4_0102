@@ -150,7 +150,7 @@ fun PengelolaHalaman(
                     navController = navController,
                     navigateToItemEntry = { navController.navigate(DestinasiInsertJenisProperty.route) },
                     onDetailClick = { idJenis ->
-                        navController.navigate("${DestinasiUpdateJenisProperti.route}/$idJenis")
+                        navController.navigate("${DestinasiDetailJenisProperti.route}/$idJenis")
                     }
                 )
             }
@@ -183,7 +183,7 @@ fun PengelolaHalaman(
                             }
                         },
                         navigateToEdit = {
-                            navController.navigate("${DestinasiUpdatePemilik.route}/$idJenis")
+                            navController.navigate("${DestinasiUpdateJenisProperti.route}/$idJenis")
                         }
                     )
                 }
