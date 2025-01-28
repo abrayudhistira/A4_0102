@@ -1,6 +1,5 @@
 package abrayudhistira.cobafinal.service
 
-import abrayudhistira.cobafinal.model.ApiResponseSingle
 import abrayudhistira.cobafinal.model.JenisProperti
 import abrayudhistira.cobafinal.model.ManajerProperti
 import abrayudhistira.cobafinal.model.Pemilik
