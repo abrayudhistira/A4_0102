@@ -22,15 +22,22 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 object DestinasiInsertJenisProperty : DestinasiNavigasi {
@@ -47,6 +54,15 @@ fun InsertViewJenisProperty(
 ) {
     val coroutineScope = rememberCoroutineScope()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+    val errorMessage = viewModel.uiState.error
+    var showSnackbar by remember { mutableStateOf(false) }
+
+    if (errorMessage != null && showSnackbar) {
+        LaunchedEffect(Unit) {
+            delay(500) // Wait for 3 seconds
+            showSnackbar = false // Dismiss the Snackbar
+        }
+    }
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
@@ -56,15 +72,21 @@ fun InsertViewJenisProperty(
                 scrollBehavior = scrollBehavior,
                 navigateUp = navigateBack
             )
+        },
+        snackbarHost = {
+            if (errorMessage != null) {
+                Snackbar { Text(text = errorMessage) }
+            }
         }
     ) { innerPadding ->
         EntryJenisPropertiBody(
             jenisPropertiUiState1 = viewModel.uiState,
             onJenisPropertiValueChange = {event -> viewModel.updateInsertJenisPropertiState(event) },
             onSaveClick = {
-                coroutineScope.launch {
-                    viewModel.insertjenisPemilik()
+                if (viewModel.insertjenisPemilik()) {
                     navigateBack()
+                } else {
+                    showSnackbar = true // Show the Snackbar when validation fails
                 }
             },
             modifier = Modifier
@@ -86,7 +108,7 @@ fun EntryJenisPropertiBody(
         verticalArrangement = Arrangement.spacedBy(18.dp),
         modifier = modifier.padding(12.dp)
     ) {
-        FormInputPemilik(
+        FormInputJenisProperti(
             jenisPropertiUiEvent = jenisPropertiUiState1.jenisPropertiUiEvent,
             onValueChange = onJenisPropertiValueChange,
             modifier = Modifier.fillMaxWidth()
@@ -104,7 +126,7 @@ fun EntryJenisPropertiBody(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FormInputPemilik(
+fun FormInputJenisProperti(
     jenisPropertiUiEvent: JenisPropertiUiEvent,
     modifier: Modifier = Modifier,
     onValueChange: (JenisPropertiUiEvent) -> Unit,

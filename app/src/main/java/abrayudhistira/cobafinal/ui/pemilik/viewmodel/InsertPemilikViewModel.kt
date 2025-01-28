@@ -16,7 +16,6 @@ class InsertPemilikViewModel(
 ) : ViewModel() {
     // Define the UI state variable for Insert operation
     var uiState by mutableStateOf(PemilikUiState1())
-        private set
 
     // Update the UI state with the new category event
     fun updateInsertPemilikState(pemilikUiEvent: PemilikUiEvent) {
@@ -27,7 +26,13 @@ class InsertPemilikViewModel(
     fun insertpemilik() {
         viewModelScope.launch {
             try {
-                // Call the insertLokasi method on the actual LokasiRepository
+                // Check if any field is empty
+                if (uiState.pemilikUiEvent.nama_pemilik.isEmpty() || uiState.pemilikUiEvent.kontak_pemilik.isEmpty()) {
+                    uiState = uiState.copy(error = "Semua field harus diisi!")
+                    return@launch
+                }
+
+                // Proceed with the insert operation if validation passes
                 pmlk.insertPemilik(uiState.pemilikUiEvent.toPmlk())
             } catch (e: Exception) {
                 // Handle the error (e.g., log or update the UI state with an error message)

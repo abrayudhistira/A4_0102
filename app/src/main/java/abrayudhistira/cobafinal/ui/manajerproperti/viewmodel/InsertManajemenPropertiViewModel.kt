@@ -27,13 +27,18 @@ class InsertManajemenPopertiViewModel(
 
     // Insert the location by calling the r epository
     fun insertmanajemenProperti() {
-        viewModelScope.launch {
-            try {
-                // Call the insertLokasi method on the actual LokasiRepository
-                manajProp.insertManajerProperti(uiState.manajemenPropertiUiEvent.toManajemenProperti())
-            } catch (e: Exception) {
-                // Handle the error (e.g., log or update the UI state with an error message)
-                e.printStackTrace()
+        val manajerProperti = uiState.manajemenPropertiUiEvent
+
+        if (manajerProperti.nama_manajer.isBlank() || manajerProperti.kontak_manajer.isBlank()) {
+            uiState = uiState.copy(error = "Semua field harus diisi!")
+        } else {
+            viewModelScope.launch {
+                try {
+                    manajProp.insertManajerProperti(manajerProperti.toManajemenProperti())
+                    uiState = uiState.copy(error = null)  // Clear error if successful
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
         }
     }

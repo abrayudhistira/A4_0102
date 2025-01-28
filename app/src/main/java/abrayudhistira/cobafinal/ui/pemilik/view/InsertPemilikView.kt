@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -44,6 +45,21 @@ fun InsertViewPemilik(
 ) {
     val coroutineScope = rememberCoroutineScope()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+
+    if (viewModel.uiState.error != null) {
+        AlertDialog(
+            onDismissRequest = { /* Handle dismiss */ },
+            title = { Text("Error") },
+            text = { Text(viewModel.uiState.error!!) },
+            confirmButton = {
+                Button(
+                    onClick = { viewModel.uiState = PemilikUiState1() } // Reset error state
+                ) {
+                    Text("OK")
+                }
+            }
+        )
+    }
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {

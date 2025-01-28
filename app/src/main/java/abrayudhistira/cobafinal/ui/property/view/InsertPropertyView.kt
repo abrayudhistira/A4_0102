@@ -59,9 +59,28 @@ fun InsertViewProperti(
             manajerList = viewModel.manajerList,
             onPropertiValueChange = { event -> viewModel.updatePropertiState(event) },
             onSaveClick = {
-                coroutineScope.launch {
-                    viewModel.insertProperti()
-                    navigateBack()
+                // Validasi apakah semua field terisi
+                if (viewModel.uiState.propertiUiEvent.namaProperti.isEmpty()) {
+                    viewModel.updatePropertiState(viewModel.uiState.propertiUiEvent.copy(error = "Nama Properti harus diisi"))
+                } else if (viewModel.uiState.propertiUiEvent.deskripsiProperti.isEmpty()) {
+                    viewModel.updatePropertiState(viewModel.uiState.propertiUiEvent.copy(error = "Deskripsi Properti harus diisi"))
+                } else if (viewModel.uiState.propertiUiEvent.lokasi.isEmpty()) {
+                    viewModel.updatePropertiState(viewModel.uiState.propertiUiEvent.copy(error = "Lokasi Properti harus diisi"))
+                } else if (viewModel.uiState.propertiUiEvent.harga.isEmpty()) {
+                    viewModel.updatePropertiState(viewModel.uiState.propertiUiEvent.copy(error = "Harga Properti harus diisi"))
+                } else if (viewModel.uiState.propertiUiEvent.statusProperti == null) {
+                    viewModel.updatePropertiState(viewModel.uiState.propertiUiEvent.copy(error = "Status Properti harus dipilih"))
+                } else if (viewModel.uiState.propertiUiEvent.idJenis == 0) {
+                    viewModel.updatePropertiState(viewModel.uiState.propertiUiEvent.copy(error = "Jenis Properti harus dipilih"))
+                } else if (viewModel.uiState.propertiUiEvent.idPemilik == 0) {
+                    viewModel.updatePropertiState(viewModel.uiState.propertiUiEvent.copy(error = "Pemilik harus dipilih"))
+                } else if (viewModel.uiState.propertiUiEvent.idManajer == 0) {
+                    viewModel.updatePropertiState(viewModel.uiState.propertiUiEvent.copy(error = "Manajer harus dipilih"))
+                } else {
+                    coroutineScope.launch {
+                        viewModel.insertProperti()
+                        navigateBack()
+                    }
                 }
             },
             modifier = Modifier

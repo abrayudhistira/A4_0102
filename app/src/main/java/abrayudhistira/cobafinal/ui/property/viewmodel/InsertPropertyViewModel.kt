@@ -82,7 +82,8 @@ data class PropertiUiEvent(
     val statusProperti: StatusProperti = StatusProperti.Tersedia,
     val idJenis: Int = 0,
     val idPemilik: Int = 0,
-    val idManajer: Int = 0
+    val idManajer: Int = 0,
+    val error: String? = null
 )
 
 // Extension function untuk mengubah PropertiUiEvent menjadi Properti

@@ -25,17 +25,21 @@ class InsertJenisPopertiViewModel(
         uiState = JenisPropertiUiState1(jenisPropertiUiEvent = jenisPropertiUiEvent)
     }
 
-    // Insert the location by calling the r epository
-    fun insertjenisPemilik() {
+    fun insertjenisPemilik(): Boolean {
+        val event = uiState.jenisPropertiUiEvent
+        if (event.nama_jenis.isBlank() || event.deskripsi_jenis.isNullOrBlank()) {
+            uiState = uiState.copy(error = "Please fill all fields")
+            return false
+        }
+
         viewModelScope.launch {
             try {
-                // Call the insertLokasi method on the actual LokasiRepository
-                jenisProp.insertJenisProperti(uiState.jenisPropertiUiEvent.toJenisProperti())
+                jenisProp.insertJenisProperti(event.toJenisProperti())
             } catch (e: Exception) {
-                // Handle the error (e.g., log or update the UI state with an error message)
                 e.printStackTrace()
             }
         }
+        return true
     }
 }
 

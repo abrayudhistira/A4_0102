@@ -64,7 +64,7 @@ fun InsertViewManajemenProperti(
             onSaveClick = {
                 coroutineScope.launch {
                     viewModel.insertmanajemenProperti()
-                    navigateBack()
+                    if (viewModel.uiState.error == null) navigateBack()
                 }
             },
             modifier = Modifier
@@ -91,6 +91,14 @@ fun EntryPemilikBody(
             onValueChange = onManajemenPropertiValueChange,
             modifier = Modifier.fillMaxWidth()
         )
+        manajemenPropertiUiState1.error?.let {
+            Text(
+                text = it,
+                color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier.padding(12.dp)
+            )
+        }
         Button(
             onClick = onSaveClick,
             shape = MaterialTheme.shapes.small,
