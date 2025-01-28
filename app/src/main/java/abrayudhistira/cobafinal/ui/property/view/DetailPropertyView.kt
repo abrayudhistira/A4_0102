@@ -12,6 +12,7 @@ import abrayudhistira.cobafinal.ui.property.viewmodel.DetailPropertyViewModel
 import abrayudhistira.cobafinal.ui.property.viewmodel.toProperti
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -51,8 +52,8 @@ object DestinasiDetailProperti : DestinasiNavigasi {
 @Composable
 fun DetailPropertyView(
     navigateBack: () -> Unit,
-    navigateToEdit: () -> Unit,
-    navigateToJenisProperti: () -> Unit,
+    navigateToEdit: (Int) -> Unit,
+    navigateToJenisPropertiDetail: (Int) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: DetailPropertyViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
@@ -69,27 +70,31 @@ fun DetailPropertyView(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(
-                onClick = navigateToEdit,
-                shape = MaterialTheme.shapes.medium,
-                modifier = Modifier.padding(18.dp)
+            Row(
+                modifier = Modifier.padding(16.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Icon(
-                    imageVector = Icons.Default.Edit,
-                    contentDescription = "Edit Properti"
-                )
+                FloatingActionButton(
+                    onClick = {navigateToEdit(viewModel.detailPropertyUiState.detailPropertyUiEvent.idProperti)},
+                    shape = MaterialTheme.shapes.medium,
+                    modifier = Modifier.padding(end = 8.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Edit,
+                        contentDescription = "Edit Properti"
+                    )
+                }
+                // Tombol untuk melihat jenis properti
+                FloatingActionButton(
+                    onClick = {navigateToJenisPropertiDetail(viewModel.detailPropertyUiState.jenisProperti.id_jenis)}, // Navigasi ke halaman jenis properti
+                    shape = MaterialTheme.shapes.medium,
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.List,
+                        contentDescription = "Lihat Jenis Properti"
+                    )
+                }
             }
-//            // Tombol untuk melihat jenis properti
-//            FloatingActionButton(
-//                onClick = navigateToJenisProperti, // Navigasi ke halaman jenis properti
-//                shape = MaterialTheme.shapes.medium,
-//                modifier = Modifier.padding(8.dp)
-//            ) {
-//                Icon(
-//                    imageVector = Icons.Default.List,
-//                    contentDescription = "Lihat Jenis Properti"
-//                )
-//            }
         }
     ) { innerPadding ->
         BodyDetailProperty(
